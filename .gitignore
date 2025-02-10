@@ -1,0 +1,15 @@
+.DS_Store
+node_modules
+*.log*
+*.local
+
+.temp
+.cache
+
+dist
+coverage
+
+**/.vitepress/cache
+**/.vitepress/temp
+
+*.tsbuildinfo

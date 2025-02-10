@@ -1,0 +1,41 @@
+#package_status {
+  --at-apply: "relative";
+}
+
+#package_status p {
+  --at-apply: "mb-0 flex relative flex-wrap gap-2";
+}
+
+/* reset max-width in playground page */
+.page-playground .VPNavBar.top .container {
+  --at-apply: "max-w-unset";
+}
+
+/* hide search in playground page */
+.page-playground .VPNavBarSearch {
+  --at-apply: "hidden";
+}
+
+/* set height for playground core */
+@media screen and (min-width: 960px) {
+  .page-playground .page-playground-core {
+    --at-apply: "h-[calc(100vh-var(--vp-nav-height))]";
+  }
+}
+
+/* dark/light radial transition */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root),
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root),
+.dark::view-transition-old(root) {
+  z-index: 9999;
+}
