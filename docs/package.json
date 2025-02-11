@@ -9,12 +9,15 @@
   },
   "dependencies": {
     "@vueuse/core": "^12.5.0",
+    "element-plus": "^2.9.4",
     "vue": "catalog:",
     "vue-validate-code": "workspace:*"
   },
   "devDependencies": {
+    "@iconify-json/ri": "^1.2.5",
     "@shikijs/vitepress-twoslash": "^2.3.2",
     "unocss": "^65.4.3",
+    "unplugin-auto-import": "^19.0.0",
     "unplugin-vue-components": "^28.0.0",
     "vite": "catalog:",
     "vitepress": "^1.6.3",

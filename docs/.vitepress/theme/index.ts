@@ -1,4 +1,6 @@
 import './app.css'
+import 'element-plus/theme-chalk/index.css'
+import 'element-plus/theme-chalk/dark/css-vars.css'
 import '@shikijs/vitepress-twoslash/style.css'
 import 'uno.css'
 import 'virtual:group-icons.css'

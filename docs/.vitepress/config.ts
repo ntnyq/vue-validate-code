@@ -29,7 +29,6 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/' },
-      { text: 'Playground', link: '/play/' },
       {
         text: `v${version}`,
         items: [
