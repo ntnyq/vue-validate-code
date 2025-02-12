@@ -22,29 +22,28 @@
   "bugs": {
     "url": "https://github.com/ntnyq/vue-validate-code/issues"
   },
-  "main": "./src/index.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "unpkg": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
   "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "import": {
-          "default": "./dist/index.mjs",
-          "types": "./dist/index.d.ts"
-        },
-        "require": {
-          "require": "./dist/index.cjs",
-          "types": "./dist/index.d.ts"
-        }
-      },
-      "./package.json": "./package.json"
-    },
-    "main": "./dist/index.mjs",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
-    "unpkg": "./dist/index.js"
+    "access": "public"
   },
   "scripts": {
     "build": "vite build",
