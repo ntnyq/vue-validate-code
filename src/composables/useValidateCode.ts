@@ -1,12 +1,6 @@
+import { cleanObject, randomHexColor, randomNumber } from '@ntnyq/utils'
 import { computed, ref, shallowRef, toValue, unref, watch } from 'vue'
-import {
-  cleanUndefinedAndNull,
-  DEFAULT_CONFIG,
-  loop,
-  randomColor,
-  randomNumber,
-  useGlobalConfig,
-} from '../helpers'
+import { DEFAULT_CONFIG, loop, useGlobalConfig } from '../helpers'
 import type { MaybeRef, MaybeRefOrGetter } from 'vue'
 import type { Props } from '../helpers'
 
@@ -32,7 +26,7 @@ export function useValidateCode(
 
   const config = computed<Required<Props>>(() => ({
     ...defaultConfig,
-    ...cleanUndefinedAndNull(toValue(options)),
+    ...cleanObject(toValue(options)),
   }))
   const resolvedChars = computed(() =>
     config.value.chars.length ? config.value.chars : DEFAULT_CONFIG.chars,
@@ -53,7 +47,7 @@ export function useValidateCode(
         : globalColors[randomNumber(0, globalColors.length)]
     }
 
-    return randomColor()
+    return randomHexColor()
   }
 
   function drawBg() {

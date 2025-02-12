@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { isEmptyString } from '@ntnyq/utils'
 import {
   onBeforeUnmount,
   onMounted,
@@ -7,12 +8,7 @@ import {
   useTemplateRef,
 } from 'vue'
 import { useValidateCode } from '../composables'
-import {
-  EventKey,
-  isString,
-  emits as vEmits,
-  props as vProps,
-} from '../helpers'
+import { EventKey, emits as vEmits, props as vProps } from '../helpers'
 
 // eslint-disable-next-line vue/define-props-declaration
 const props = defineProps(vProps)
@@ -34,7 +30,7 @@ const {
 )
 
 function validate(input: string) {
-  if (!isString(input) || !input.length) {
+  if (isEmptyString(input)) {
     emits(EventKey.Fail)
     return false
   }
