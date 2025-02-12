@@ -23,8 +23,11 @@
     "url": "https://github.com/ntnyq/vue-validate-code/issues"
   },
   "main": "./src/index.ts",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
-    "browser": "./dist/index.umd.js",
+    "access": "public",
     "exports": {
       ".": {
         "import": "./dist/index.es.js",
@@ -33,13 +36,9 @@
       },
       "./package.json": "./package.json"
     },
-    "files": [
-      "dist"
-    ],
     "main": "./dist/index.es.js",
     "module": "./dist/index.es.js",
-    "types": "./dist/index.d.ts",
-    "unpkg": "./dist/index.umd.js"
+    "types": "./dist/index.d.ts"
   },
   "scripts": {
     "build": "vite build",
