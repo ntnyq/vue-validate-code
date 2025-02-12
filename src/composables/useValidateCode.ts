@@ -1,5 +1,6 @@
 import { computed, ref, shallowRef, toValue, unref, watch } from 'vue'
 import {
+  cleanUndefinedAndNull,
   DEFAULT_CONFIG,
   loop,
   randomColor,
@@ -28,9 +29,10 @@ export function useValidateCode(
     ...DEFAULT_CONFIG,
     ...useGlobalConfig(),
   }
+
   const config = computed<Required<Props>>(() => ({
     ...defaultConfig,
-    ...toValue(options),
+    ...cleanUndefinedAndNull(toValue(options)),
   }))
   const resolvedChars = computed(() =>
     config.value.chars.length ? config.value.chars : DEFAULT_CONFIG.chars,

@@ -7,7 +7,12 @@ import {
   useTemplateRef,
 } from 'vue'
 import { useValidateCode } from '../composables'
-import { EventKey, emits as vEmits, props as vProps } from '../helpers'
+import {
+  EventKey,
+  isString,
+  emits as vEmits,
+  props as vProps,
+} from '../helpers'
 
 // eslint-disable-next-line vue/define-props-declaration
 const props = defineProps(vProps)
@@ -29,7 +34,7 @@ const {
 )
 
 function validate(input: string) {
-  if (typeof input !== 'string' || !input.length) {
+  if (!isString(input) || !input.length) {
     emits(EventKey.Fail)
     return false
   }
