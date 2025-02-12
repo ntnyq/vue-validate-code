@@ -32,6 +32,9 @@ export function useValidateCode(
     ...defaultConfig,
     ...toValue(options),
   }))
+  const resolvedChars = computed(() =>
+    config.value.chars.length ? config.value.chars : DEFAULT_CONFIG.chars,
+  )
 
   function getColor(colors: string[] = []) {
     if (colors.length) {
@@ -111,7 +114,7 @@ export function useValidateCode(
     const chars: string[] = []
 
     loop(config.value.fontCount, idx => {
-      const char = config.value.chars[randomNumber(config.value.chars.length)]
+      const char = resolvedChars.value[randomNumber(resolvedChars.value.length)]
       const fontSize = randomNumber(
         config.value.minFontSize,
         config.value.maxFontSize,
