@@ -1,7 +1,7 @@
 {
   "name": "vue-validate-code",
   "type": "module",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "packageManager": "pnpm@10.3.0",
   "description": "Vue validate code",
   "keywords": [
