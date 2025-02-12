@@ -7,6 +7,10 @@ export const enConfig = defineConfig({
   description: appDescription,
 
   themeConfig: {
+    outline: {
+      level: [2, 4],
+    },
+
     editLink: {
       text: 'Suggest changes to this page',
       pattern: `https://github.com/ntnyq/${packageName}/edit/main/docs/:path`,

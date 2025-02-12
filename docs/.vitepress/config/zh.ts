@@ -7,7 +7,12 @@ export const zhConfig = defineConfig({
   title: appTitleZh,
   description: appDescriptionZh,
   themeConfig: {
+    lastUpdated: {
+      text: '最近更新时间',
+    },
+
     outline: {
+      level: [2, 4],
       label: '本页内容',
     },
 
