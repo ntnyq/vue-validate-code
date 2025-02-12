@@ -2,6 +2,12 @@ import Vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import DTS from 'vite-plugin-dts'
 
+const FORMAT_TO_FILENAME = {
+  cjs: 'index.cjs',
+  es: 'index.mjs',
+  umd: 'index.js',
+}
+
 export default defineConfig({
   build: {
     minify: false,
@@ -9,14 +15,14 @@ export default defineConfig({
       entry: 'src/index.ts',
       formats: ['cjs', 'es', 'umd'],
       name: 'VueValidateCode',
-      fileName: format => `index.${format}.js`,
+      fileName: format =>
+        FORMAT_TO_FILENAME[format as keyof typeof FORMAT_TO_FILENAME],
     },
     rollupOptions: {
       external: ['vue'],
       treeshake: 'safest',
       output: {
         exports: 'named',
-        // preserveModules: true,
         globals: {
           vue: 'Vue',
         },
