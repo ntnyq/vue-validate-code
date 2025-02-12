@@ -1,10 +1,14 @@
-import { fileURLToPath } from 'node:url'
+import path from 'node:path'
+import { fileURLToPath, URL } from 'node:url'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import VueComponents from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
+const resolve = (...args: string[]) => path.resolve(__dirname, ...args)
 
 export default defineConfig({
   optimizeDeps: {
@@ -13,7 +17,7 @@ export default defineConfig({
   plugins: [
     UnoCSS(),
     AutoImport({
-      dts: fileURLToPath(new URL('./auto-imports.d.ts', import.meta.url)),
+      dts: resolve('./auto-imports.d.ts'),
       imports: ['vue', '@vueuse/core'],
       resolvers: [
         ElementPlusResolver({
@@ -22,12 +26,10 @@ export default defineConfig({
       ],
     }),
     VueComponents({
-      dts: fileURLToPath(new URL('./components.d.ts', import.meta.url)),
+      dirs: [resolve('./.vitepress/components')],
+      dts: resolve('./components.d.ts'),
       extensions: ['vue', 'md'],
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      dirs: [
-        fileURLToPath(new URL('./.vitepress/components', import.meta.url)),
-      ],
       resolvers: [
         ElementPlusResolver({
           importStyle: false,

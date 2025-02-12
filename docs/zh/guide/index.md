@@ -1,6 +1,6 @@
-# Guide
+# 指南
 
-## Installation
+## 安装
 
 ::: code-group
 
@@ -18,9 +18,9 @@ pnpm add vue-validate-code
 
 :::
 
-## Usage
+## 使用
 
-### As component
+### 作为组件使用
 
 ```vue [validate-code.vue]
 <script lang="ts" setup>
@@ -53,7 +53,7 @@ function handleUpdate() {
 </template>
 ```
 
-### As plugin
+### 作为插件使用
 
 ```ts [main.ts]
 import { createApp } from 'vue'
@@ -67,8 +67,8 @@ app.use(ValidateCode)
 app.mount('#app')
 ```
 
-Then you can component `ValidateCode` in your app everywhere like above.
+然后你就可以在你的 Vue 应用内使用 `ValidateCode` 组件，如上所示。
 
-## Props
+## 属性
 
-## Events
+## 事件
