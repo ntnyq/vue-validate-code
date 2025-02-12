@@ -1,4 +1,4 @@
-import { computed, ref, shallowRef, toValue, unref } from 'vue'
+import { computed, ref, shallowRef, toValue, unref, watch } from 'vue'
 import {
   DEFAULT_CONFIG,
   loop,

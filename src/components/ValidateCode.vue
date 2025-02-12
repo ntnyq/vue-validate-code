@@ -1,5 +1,11 @@
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted, useTemplateRef } from 'vue'
+import {
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  toRefs,
+  useTemplateRef,
+} from 'vue'
 import { useValidateCode } from '../composables'
 import { emits as _emits, props as _props, EventKey } from '../helpers'
 
