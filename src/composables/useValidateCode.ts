@@ -4,7 +4,7 @@ import { DEFAULT_CONFIG, loop, useGlobalConfig } from '../helpers'
 import type { MaybeRef, MaybeRefOrGetter } from 'vue'
 import type { Props } from '../helpers'
 
-interface CanvasSize {
+export interface CanvasSize {
   width: number
   height: number
 }
@@ -205,6 +205,7 @@ export function useValidateCode(
 
     render,
     destroy,
+    resize,
     update,
     validate,
   }

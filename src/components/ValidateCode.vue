@@ -18,8 +18,9 @@ const emits = defineEmits(vEmits)
 const canvasRef = useTemplateRef('canvasRef')
 
 const {
-  render,
   destroy,
+  render,
+  resize,
   update,
   validate: validateCode,
 } = useValidateCode(
@@ -59,10 +60,11 @@ onMounted(() => {
 })
 
 defineExpose({
+  destroy,
   render,
+  resize,
   update,
   validate,
-  destroy,
 })
 </script>
 
