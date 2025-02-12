@@ -1,17 +1,43 @@
 <script lang="ts" setup>
 import { onBeforeUnmount, onMounted, useTemplateRef } from 'vue'
 import { useValidateCode } from '../composables'
-import { EventKey, emits as vEmits, props as vProps } from '../helpers'
+import { emits as _emits, props as _props, EventKey } from '../helpers'
 
 // eslint-disable-next-line vue/define-props-declaration
-const props = defineProps(vProps)
+const props = defineProps(_props)
 // eslint-disable-next-line vue/define-emits-declaration
-const emits = defineEmits(vEmits)
+const emits = defineEmits(_emits)
 
 const canvasRef = useTemplateRef('canvasRef')
 
-const { init, destroy, update, validate } = useValidateCode(canvasRef, props)
+const {
+  render,
+  destroy,
+  update,
+  validate: validateCode,
+} = useValidateCode(
+  canvasRef,
+  reactive({
+    ...toRefs(props),
+  }),
+)
 
+function validate(input: string) {
+  if (typeof input !== 'string' || !input.length) {
+    emits(EventKey.Fail)
+    return false
+  }
+
+  const isValid = validateCode(input)
+
+  if (isValid) {
+    emits(EventKey.Success)
+  } else {
+    emits(EventKey.Fail)
+  }
+
+  return isValid
+}
 function handleClick() {
   update()
 }
@@ -21,12 +47,12 @@ onBeforeUnmount(() => {
 })
 
 onMounted(() => {
-  init()
+  render()
   emits(EventKey.Ready)
 })
 
 defineExpose({
-  init,
+  render,
   update,
   validate,
   destroy,

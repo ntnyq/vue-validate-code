@@ -44,7 +44,6 @@
   "scripts": {
     "build": "vite build",
     "coverage": "vitest --coverage",
-    "dev": "vite",
     "docs:build": "pnpm -C docs run build",
     "docs:dev": "pnpm -C docs run dev",
     "lint": "eslint .",
@@ -64,7 +63,7 @@
     "@vitest/coverage-v8": "catalog:",
     "@vue/test-utils": "^2.4.6",
     "bumpp": "^10.0.3",
-    "eslint": "^9.20.0",
+    "eslint": "^9.20.1",
     "husky": "^9.1.7",
     "nano-staged": "^0.8.0",
     "npm-run-all2": "^7.0.2",

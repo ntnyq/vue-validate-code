@@ -29,27 +29,8 @@ export function useValidateCode(
     ...useGlobalConfig(),
   }
   const config = computed<Required<Props>>(() => ({
-    colors: toValue(options).colors ?? defaultConfig.colors,
-    bgColors: toValue(options).bgColors ?? defaultConfig.bgColors,
-    lineCount: toValue(options).lineCount ?? defaultConfig.lineCount,
-    lineColors: toValue(options).lineColors ?? defaultConfig.lineColors,
-    minLineWidth: toValue(options).minLineWidth ?? defaultConfig.minLineWidth,
-    maxLineWidth: toValue(options).maxLineWidth ?? defaultConfig.maxLineWidth,
-    dotCount: toValue(options).dotCount ?? defaultConfig.dotCount,
-    dotColors: toValue(options).dotColors ?? defaultConfig.dotColors,
-    minDotRadius: toValue(options).minDotRadius ?? defaultConfig.minDotRadius,
-    maxDotRadius: toValue(options).maxDotRadius ?? defaultConfig.maxDotRadius,
-    fontCount: toValue(options).fontCount ?? defaultConfig.fontCount,
-    chars: toValue(options).chars ?? defaultConfig.chars,
-    minFontSize: toValue(options).minFontSize ?? defaultConfig.minFontSize,
-    maxFontSize: toValue(options).maxFontSize ?? defaultConfig.maxFontSize,
-    fontFamily: toValue(options).fontFamily ?? defaultConfig.fontFamily,
-    fontColors: toValue(options).fontColors ?? defaultConfig.fontColors,
-    padding: toValue(options).padding ?? defaultConfig.padding,
-    minFontAngle: toValue(options).minFontAngle ?? defaultConfig.minFontAngle,
-    maxFontAngle: toValue(options).maxFontAngle ?? defaultConfig.maxFontAngle,
-    hasDot: toValue(options).hasDot ?? defaultConfig.hasDot,
-    hasLine: toValue(options).hasLine ?? defaultConfig.hasLine,
+    ...defaultConfig,
+    ...toValue(options),
   }))
 
   function getColor(colors: string[] = []) {
@@ -81,6 +62,10 @@ export function useValidateCode(
   function drawLines() {
     const ctx = context.value
 
+    if (!config.value.hasLines) {
+      return
+    }
+
     loop(config.value.lineCount, () => {
       ctx.strokeStyle = getColor(config.value.lineColors)
       ctx.beginPath()
@@ -102,6 +87,10 @@ export function useValidateCode(
 
   function drawDots() {
     const ctx = context.value
+
+    if (!config.value.hasDots) {
+      return
+    }
 
     loop(config.value.dotCount, () => {
       ctx.fillStyle = getColor(config.value.dotColors)
@@ -165,7 +154,9 @@ export function useValidateCode(
   }
 
   function validate(input: string) {
-    return input === validateCode.value
+    return config.value.caseSensitive
+      ? input === validateCode.value
+      : input.toLowerCase() === validateCode.value.toLowerCase()
   }
 
   function destroy() {
@@ -175,6 +166,7 @@ export function useValidateCode(
       canvasSize.value.width,
       canvasSize.value.height,
     )
+    validateCode.value = ''
     canvasEl.value = undefined!
     context.value = undefined!
     canvasSize.value = { width: 0, height: 0 }
@@ -186,7 +178,7 @@ export function useValidateCode(
     canvasSize.value = size
   }
 
-  function init() {
+  function render() {
     if (!unref(canvasRef)) return
 
     const el: HTMLCanvasElement = unref(canvasRef)!
@@ -201,13 +193,18 @@ export function useValidateCode(
     update()
   }
 
+  watch(config, newConfig => {
+    if (newConfig.autoUpdate) {
+      update()
+    }
+  })
+
   return {
     validateCode,
-    defaultConfig,
     canvasEl,
     canvasSize,
 
-    init,
+    render,
     destroy,
     update,
     validate,

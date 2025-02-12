@@ -28,7 +28,6 @@ import { useTemplateRef } from 'vue'
 import { ValidateCode } from 'vue-validate-code'
 
 const validateCode = ref('')
-
 const validateCodeRef = useTemplateRef('validateCodeRef')
 
 function handleValidate() {

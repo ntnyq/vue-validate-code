@@ -11,6 +11,8 @@ const NonDefaultBooleanType = {
 export const props = {
   chars: String,
   padding: Number,
+  autoUpdate: NonDefaultBooleanType,
+  caseSensitive: NonDefaultBooleanType,
   colors: Array as PropType<string[]>,
 
   bgColors: Array as PropType<string[]>,
@@ -27,13 +29,13 @@ export const props = {
   lineColors: Array as PropType<string[]>,
   minLineWidth: Number,
   maxLineWidth: Number,
-  hasLine: NonDefaultBooleanType,
+  hasLines: NonDefaultBooleanType,
 
   dotCount: Number,
   dotColors: Array as PropType<string[]>,
   minDotRadius: Number,
   maxDotRadius: Number,
-  hasDot: NonDefaultBooleanType,
+  hasDots: NonDefaultBooleanType,
 }
 
 export enum EventKey {
