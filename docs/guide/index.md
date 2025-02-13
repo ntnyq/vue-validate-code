@@ -238,6 +238,12 @@ Max line width.
 
 ## Events
 
+### validate
+
+- **type**: `(isValid: boolean) => void`
+
+Triggered after [validate](#validate) method is called, callback the validate result.
+
 ### success
 
 - **type**: `() => void`

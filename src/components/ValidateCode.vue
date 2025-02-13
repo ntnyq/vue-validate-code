@@ -8,12 +8,10 @@ import {
   useTemplateRef,
 } from 'vue'
 import { useValidateCode } from '../composables'
-import { EventKey, emits as vEmits, props as vProps } from '../helpers'
+import type { Emits, Props } from '../helpers'
 
-// eslint-disable-next-line vue/define-props-declaration
-const props = defineProps(vProps)
-// eslint-disable-next-line vue/define-emits-declaration
-const emits = defineEmits(vEmits)
+const props = defineProps<Props>()
+const emits = defineEmits<Emits>()
 
 const canvasRef = useTemplateRef('canvasRef')
 
@@ -32,16 +30,18 @@ const {
 
 function validate(input: string) {
   if (isEmptyString(input)) {
-    emits(EventKey.Fail)
+    emits('fail')
     return false
   }
 
   const isValid = validateCode(input)
 
+  emits('validate', isValid)
+
   if (isValid) {
-    emits(EventKey.Success)
+    emits('success')
   } else {
-    emits(EventKey.Fail)
+    emits('fail')
   }
 
   return isValid
@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
 
 onMounted(() => {
   render()
-  emits(EventKey.Ready)
+  emits('ready')
 })
 
 defineExpose({

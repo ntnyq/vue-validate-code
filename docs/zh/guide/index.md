@@ -238,6 +238,12 @@ Props 变更时自动更新验证码。
 
 ## 事件
 
+### validate
+
+- **type**: `(isValid: boolean) => void`
+
+当 [validate](#validate) 被调用后触发，参数为校验结果。
+
 ### success
 
 - **类型**: `() => void`

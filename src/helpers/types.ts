@@ -1,55 +1,57 @@
-import type { ExtractPropTypes, PropType } from 'vue'
+/**
+ * The events of component `ValidateCode`
+ *
+ * @see {@link https://vue-validate-code.ntnyq.com/guide/#events}
+ */
+export type Emits = {
+  /**
+   * Triggered when validate method return `false`
+   */
+  fail: []
 
-// eslint-disable-next-line no-void
-const UNDEFINED = void 0
+  /**
+   * Triggered when the component rendered
+   */
+  ready: []
 
-const NonDefaultBooleanType = {
-  type: Boolean,
-  default: UNDEFINED,
+  /**
+   * Triggered when validate method return `true`
+   */
+  success: []
+
+  /**
+   * Triggered after validate method is called
+   */
+  validate: [isValid: boolean]
 }
 
-export const props = {
-  chars: String,
-  padding: Number,
-  autoUpdate: NonDefaultBooleanType,
-  caseSensitive: NonDefaultBooleanType,
-  colors: Array as PropType<string[]>,
-
-  bgColors: Array as PropType<string[]>,
-
-  fontCount: Number,
-  fontFamily: String,
-  fontColors: Array as PropType<string[]>,
-  minFontSize: Number,
-  maxFontSize: Number,
-  minFontAngle: Number,
-  maxFontAngle: Number,
-
-  lineCount: Number,
-  lineColors: Array as PropType<string[]>,
-  minLineWidth: Number,
-  maxLineWidth: Number,
-  hasLines: NonDefaultBooleanType,
-
-  dotCount: Number,
-  dotColors: Array as PropType<string[]>,
-  minDotRadius: Number,
-  maxDotRadius: Number,
-  hasDots: NonDefaultBooleanType,
+/**
+ * The config of the plugin and props of component `ValidateCode`
+ *
+ * @see {@link https://vue-validate-code.ntnyq.com/guide/#props}
+ */
+export type Props = {
+  autoUpdate?: boolean
+  bgColors?: string[]
+  caseSensitive?: boolean
+  chars?: string
+  colors?: string[]
+  dotColors?: string[]
+  dotCount?: number
+  fontColors?: string[]
+  fontCount?: number
+  fontFamily?: string
+  hasDots?: boolean
+  hasLines?: boolean
+  lineColors?: string[]
+  lineCount?: number
+  maxDotRadius?: number
+  maxFontAngle?: number
+  maxFontSize?: number
+  maxLineWidth?: number
+  minDotRadius?: number
+  minFontAngle?: number
+  minFontSize?: number
+  minLineWidth?: number
+  padding?: number
 }
-
-export enum EventKey {
-  Success = 'success',
-  Fail = 'fail',
-  Ready = 'ready',
-}
-
-export type Props = ExtractPropTypes<typeof props>
-
-export const emits = {
-  [EventKey.Success]: () => true,
-  [EventKey.Fail]: () => true,
-  [EventKey.Ready]: () => true,
-}
-
-export type Emits = typeof emits

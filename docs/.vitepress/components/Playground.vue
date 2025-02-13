@@ -13,7 +13,6 @@ const { lang, t } = useLocale()
 const validateCodeRef = useTemplateRef('validateCodeRef')
 
 const validateCode = ref('')
-const isValidateCodeValid = ref(false)
 const config = ref<Props>({
   ...DEFAULT_CONFIG,
   minFontSize: 40,
@@ -32,7 +31,6 @@ const fontFamilyOptions: OptionType[] = [
 
 function handleUpdate() {
   validateCodeRef.value?.update()
-  isValidateCodeValid.value = false
   validateCode.value = ''
 }
 function handleValidate() {
@@ -43,22 +41,20 @@ function handleValidate() {
     })
   }
 
-  const isValid = validateCodeRef.value?.validate(validateCode.value) ?? false
-
-  isValidateCodeValid.value = isValid
-
-  if (isValid) {
-    ElNotification.success({
-      title: t('titleValidateResult'),
-      message: t('messageValidateSuccess'),
-    })
-  } else {
-    ElNotification.success({
-      title: t('titleValidateResult'),
-      message: t('messageValidateFail'),
-    })
-    handleUpdate()
-  }
+  validateCodeRef.value?.validate(validateCode.value)
+}
+function handleValidateSuccess() {
+  ElNotification.success({
+    title: t('titleValidateResult'),
+    message: t('messageValidateSuccess'),
+  })
+}
+function handleValidateFail() {
+  ElNotification.success({
+    title: t('titleValidateResult'),
+    message: t('messageValidateFail'),
+  })
+  handleUpdate()
 }
 </script>
 
@@ -74,6 +70,8 @@ function handleValidate() {
           <div class="h-200px flex-center">
             <div class="h-80px w-240px cursor-pointer">
               <ValidateCode
+                @success="handleValidateSuccess"
+                @fail="handleValidateFail"
                 v-bind="config"
                 ref="validateCodeRef"
               />
