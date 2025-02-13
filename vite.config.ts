@@ -1,6 +1,6 @@
 import Vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
-import DTS from 'vite-plugin-dts'
+import Dts from 'vite-plugin-dts'
 
 const FORMAT_TO_FILENAME = {
   cjs: 'index.cjs',
@@ -30,8 +30,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    DTS({
-      // include: [],
+    Dts({
       insertTypesEntry: true,
       rollupTypes: true,
       strictOutput: true,

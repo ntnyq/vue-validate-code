@@ -67,7 +67,7 @@
   "devDependencies": {
     "@ntnyq/eslint-config": "^4.0.0-beta.4",
     "@ntnyq/prettier-config": "^2.0.0-beta.2",
-    "@ntnyq/utils": "^0.5.2",
+    "@ntnyq/utils": "0.5.1",
     "@types/node": "^22.13.2",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitest/coverage-v8": "catalog:",
