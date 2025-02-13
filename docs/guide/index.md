@@ -34,26 +34,38 @@ import { ValidateCode } from 'vue-validate-code'
 const validateCode = ref('')
 const validateCodeRef = useTemplateRef('validateCodeRef')
 
-function handleValidate() {
+function handleUpdateValidateCode() {
+  validateCodeRef.value?.update()
+}
+function handleTriggerValidate() {
   if (!validateCode.value) {
     return console.log('No validate code value')
   }
 
-  const isValid = validateCodeRef.value?.validate(validateCode.value)
-
-  console.log({ isValid })
+  cvalidateCodeRef.value?.validate(validateCode.value)
 }
-
-function handleUpdate() {
-  validateCodeRef.value?.update()
+function handleValidateCallback(isValid) {
+  if (isValid) {
+    console.log('validate success')
+  } else {
+    console.log('validate fail')
+    handleUpdateValidateCode()
+  }
 }
 </script>
 
 <template>
   <ValidateCode
-    @click="handleUpdate"
+    @validate="handleValidateCallback"
+    @click="handleUpdateValidateCode"
     ref="validateCodeRef"
   />
+  <button
+    @click="handleTriggerValidate"
+    type="button"
+  >
+    Validate
+  </button>
 </template>
 ```
 
