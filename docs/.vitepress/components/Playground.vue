@@ -38,8 +38,8 @@ function handleUpdate() {
 function handleValidate() {
   if (!validateCode.value) {
     return ElNotification.warning({
-      title: '提示',
-      message: '请输入验证码',
+      title: t('titleNotice'),
+      message: t('messageFillValidateCode'),
     })
   }
 
@@ -49,13 +49,13 @@ function handleValidate() {
 
   if (isValid) {
     ElNotification.success({
-      title: '校验结果',
-      message: '校验成功',
+      title: t('titleValidateResult'),
+      message: t('messageValidateSuccess'),
     })
   } else {
     ElNotification.success({
-      title: '校验结果',
-      message: '校验失败',
+      title: t('titleValidateResult'),
+      message: t('messageValidateFail'),
     })
     handleUpdate()
   }
