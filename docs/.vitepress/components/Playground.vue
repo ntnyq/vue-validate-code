@@ -69,12 +69,14 @@ function handleValidateFail() {
         <ElCol :md="16">
           <div class="h-200px flex-center">
             <div class="h-80px w-240px cursor-pointer">
-              <ValidateCode
-                @success="handleValidateSuccess"
-                @fail="handleValidateFail"
-                v-bind="config"
-                ref="validateCodeRef"
-              />
+              <ClientOnly>
+                <ValidateCode
+                  @success="handleValidateSuccess"
+                  @fail="handleValidateFail"
+                  v-bind="config"
+                  ref="validateCodeRef"
+                />
+              </ClientOnly>
             </div>
           </div>
         </ElCol>
@@ -91,7 +93,11 @@ function handleValidateFail() {
             />
           </div>
           <ElRow justify="space-between">
-            <ElCol :span="6">
+            <ElCol
+              :span="8"
+              :md="7"
+              :lg="6"
+            >
               <ElButton
                 @click="handleUpdate"
                 type="primary"
@@ -101,7 +107,11 @@ function handleValidateFail() {
                 <span class="ml-1">{{ t('update') }}</span>
               </ElButton>
             </ElCol>
-            <ElCol :span="6">
+            <ElCol
+              :span="8"
+              :md="7"
+              :lg="6"
+            >
               <ElButton
                 @click="handleValidate"
                 type="primary"

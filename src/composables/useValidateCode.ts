@@ -15,8 +15,8 @@ export function useValidateCode(
 ) {
   const validateCode = ref('')
 
-  const canvasEl = shallowRef<HTMLCanvasElement>(undefined!)
-  const context = shallowRef<CanvasRenderingContext2D>(undefined!)
+  const canvasElement = shallowRef<HTMLCanvasElement>(undefined!)
+  const canvasContext = shallowRef<CanvasRenderingContext2D>(undefined!)
   const canvasSize = shallowRef<CanvasSize>({ width: 0, height: 0 })
 
   const defaultConfig = {
@@ -51,7 +51,7 @@ export function useValidateCode(
   }
 
   function drawBg() {
-    const ctx = context.value
+    const ctx = canvasContext.value
 
     ctx.textBaseline = 'middle'
     ctx.fillStyle = getColor(config.value.bgColors)
@@ -59,7 +59,7 @@ export function useValidateCode(
   }
 
   function drawLines() {
-    const ctx = context.value
+    const ctx = canvasContext.value
 
     if (!config.value.hasLines) {
       return
@@ -85,7 +85,7 @@ export function useValidateCode(
   }
 
   function drawDots() {
-    const ctx = context.value
+    const ctx = canvasContext.value
 
     if (!config.value.hasDots) {
       return
@@ -106,7 +106,7 @@ export function useValidateCode(
   }
 
   function drawChars() {
-    const ctx = context.value
+    const ctx = canvasContext.value
     const chars: string[] = []
 
     loop(config.value.fontCount, idx => {
@@ -159,34 +159,35 @@ export function useValidateCode(
   }
 
   function destroy() {
-    context.value.clearRect(
+    canvasContext.value.clearRect(
       0,
       0,
       canvasSize.value.width,
       canvasSize.value.height,
     )
     validateCode.value = ''
-    canvasEl.value = undefined!
-    context.value = undefined!
+    canvasElement.value = undefined!
+    canvasContext.value = undefined!
     canvasSize.value = { width: 0, height: 0 }
   }
 
   function resize(size: CanvasSize) {
-    canvasEl.value.width = size.width
-    canvasEl.value.height = size.height
+    canvasElement.value.width = size.width
+    canvasElement.value.height = size.height
     canvasSize.value = size
   }
 
   function render() {
-    if (!unref(canvasRef)) return
+    const element = unref(canvasRef)
 
-    const el: HTMLCanvasElement = unref(canvasRef)!
+    if (!element || !element.parentNode) return
+
     const { width, height } = (
-      el.parentNode as HTMLElement
+      element.parentNode as HTMLElement
     ).getBoundingClientRect()
 
-    context.value = el.getContext('2d') as CanvasRenderingContext2D
-    canvasEl.value = el
+    canvasContext.value = element.getContext('2d') as CanvasRenderingContext2D
+    canvasElement.value = element
 
     resize({ width, height })
     update()
@@ -200,7 +201,7 @@ export function useValidateCode(
 
   return {
     validateCode,
-    canvasEl,
+    canvasElement,
     canvasSize,
 
     render,

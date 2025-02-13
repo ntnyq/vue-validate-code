@@ -13,7 +13,8 @@ import type { Emits, Props } from '../helpers'
 const props = defineProps<Props>()
 const emits = defineEmits<Emits>()
 
-const canvasRef = useTemplateRef('canvasRef')
+// https://github.com/vuejs/core/issues/11795#issuecomment-2326858438
+const canvasEl = useTemplateRef('canvasRef')
 
 const {
   destroy,
@@ -22,7 +23,7 @@ const {
   update,
   validate: validateCode,
 } = useValidateCode(
-  canvasRef,
+  canvasEl,
   reactive({
     ...toRefs(props),
   }),
