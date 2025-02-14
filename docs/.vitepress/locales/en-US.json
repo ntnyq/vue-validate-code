@@ -1,5 +1,4 @@
 {
-  "autoUpdate": "AutoUpdate",
   "caseSensitive": "CaseSensitive",
   "chars": "Chars",
   "dotCount": "DotCount",
@@ -23,13 +22,15 @@
   "minLineWidth": "MinLineWidth",
   "no": "No",
   "padding": "Padding",
-  "placeholderChars": "FillChars",
+  "placeholderChars": "Fill Chars",
   "placeholderCode": "Fill Code",
   "renderDots": "RenderDots",
   "renderLines": "RenderLines",
   "titleNotice": "Notice",
   "titleValidateResult": "ValidateResult",
   "update": "Update",
+  "updateOnChange": "UpdateOnChange",
+  "updateOnClick": "UpdateOnClick",
   "validate": "Validate",
   "yes": "Yes"
 }

@@ -194,15 +194,15 @@ export function useValidateCode(
   }
 
   watch(config, newConfig => {
-    if (newConfig.autoUpdate) {
-      update()
-    }
+    if (!newConfig.updateOnChange) return
+    update()
   })
 
   return {
-    validateCode,
-    canvasElement,
+    config,
     canvasSize,
+    canvasElement,
+    validateCode,
 
     render,
     destroy,

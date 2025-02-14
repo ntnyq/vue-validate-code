@@ -2,7 +2,7 @@
   "name": "vue-validate-code",
   "type": "module",
   "version": "0.0.9",
-  "packageManager": "pnpm@10.3.0",
+  "packageManager": "pnpm@10.4.0",
   "description": "Vue validate code",
   "keywords": [
     "validate",

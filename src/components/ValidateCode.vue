@@ -17,6 +17,7 @@ const emits = defineEmits<Emits>()
 const canvasEl = useTemplateRef('canvasRef')
 
 const {
+  config,
   destroy,
   render,
   resize,
@@ -29,6 +30,10 @@ const {
   }),
 )
 
+function handleClick() {
+  if (!config.value.updateOnClick) return
+  update()
+}
 function validate(input: string) {
   if (isEmptyString(input)) {
     emits('fail')
@@ -46,9 +51,6 @@ function validate(input: string) {
   }
 
   return isValid
-}
-function handleClick() {
-  update()
 }
 
 onBeforeUnmount(() => {

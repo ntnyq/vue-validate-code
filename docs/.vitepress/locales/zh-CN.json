@@ -1,5 +1,4 @@
 {
-  "autoUpdate": "自动更新",
   "caseSensitive": "大小写敏感",
   "chars": "字符集",
   "dotCount": "圆点数量",
@@ -30,6 +29,8 @@
   "titleNotice": "提示",
   "titleValidateResult": "校验结果",
   "update": "更新",
+  "updateOnChange": "变更自动更新",
+  "updateOnClick": "点击自动更新",
   "validate": "校验",
   "yes": "是"
 }

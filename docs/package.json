@@ -8,7 +8,7 @@
     "dev": "vitepress dev ."
   },
   "dependencies": {
-    "@vueuse/core": "^12.5.0",
+    "@vueuse/core": "^12.6.0",
     "element-plus": "^2.9.4",
     "vue": "catalog:",
     "vue-validate-code": "workspace:*"

@@ -5,7 +5,6 @@ import type { Props } from './types'
 export const DEFAULT_CONFIG = Object.freeze<Required<Props>>({
   chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
   padding: 10,
-  autoUpdate: true,
   caseSensitive: true,
   colors: [],
   bgColors: [],
@@ -26,6 +25,8 @@ export const DEFAULT_CONFIG = Object.freeze<Required<Props>>({
   maxDotRadius: 3,
   hasDots: true,
   hasLines: true,
+  updateOnChange: true,
+  updateOnClick: true,
 })
 
 export const GLOBAL_CONFIG_KEY: InjectionKey<Props> =

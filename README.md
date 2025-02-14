@@ -30,14 +30,10 @@ import { ValidateCode } from 'vue-validate-code'
 const validateCode = ref('')
 const validateCodeRef = useTemplateRef('validateCodeRef')
 
-function handleUpdateValidateCode() {
-  validateCodeRef.value?.update()
-}
 function handleTriggerValidate() {
   if (!validateCode.value) {
     return console.log('No validate code value')
   }
-
   cvalidateCodeRef.value?.validate(validateCode.value)
 }
 function handleValidateCallback(isValid) {
@@ -45,7 +41,7 @@ function handleValidateCallback(isValid) {
     console.log('validate success')
   } else {
     console.log('validate fail')
-    handleUpdateValidateCode()
+    validateCodeRef.value?.update()
   }
 }
 </script>
@@ -53,8 +49,11 @@ function handleValidateCallback(isValid) {
 <template>
   <ValidateCode
     @validate="handleValidateCallback"
-    @click="handleUpdateValidateCode"
     ref="validateCodeRef"
+  />
+  <input
+    v-model="validateCode"
+    placeholder="Fill the validate code"
   />
   <button
     @click="handleTriggerValidate"

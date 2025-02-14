@@ -34,14 +34,10 @@ import { ValidateCode } from 'vue-validate-code'
 const validateCode = ref('')
 const validateCodeRef = useTemplateRef('validateCodeRef')
 
-function handleUpdateValidateCode() {
-  validateCodeRef.value?.update()
-}
 function handleTriggerValidate() {
   if (!validateCode.value) {
     return console.log('未输入验证码')
   }
-
   cvalidateCodeRef.value?.validate(validateCode.value)
 }
 function handleValidateCallback(isValid) {
@@ -49,7 +45,7 @@ function handleValidateCallback(isValid) {
     console.log('校验成功')
   } else {
     console.log('校验失败')
-    handleUpdateValidateCode()
+    validateCodeRef.value?.update()
   }
 }
 </script>
@@ -57,8 +53,11 @@ function handleValidateCallback(isValid) {
 <template>
   <ValidateCode
     @validate="handleValidateCallback"
-    @click="handleUpdateValidateCode"
     ref="validateCodeRef"
+  />
+  <input
+    v-model="validateCode"
+    placeholder="请输入验证码"
   />
   <button
     @click="handleTriggerValidate"
@@ -101,12 +100,19 @@ app.mount('#app')
 
 画布内间距。
 
-### autoUpdate
+### updateOnChange
 
 - **类型**: `boolean`
 - **默认值**: `true`
 
 Props 变更时自动更新验证码。
+
+### updateOnClick
+
+- **类型**: `boolean`
+- **默认值**: `true`
+
+点击时自动更新验证码。
 
 ### caseSensitive
 

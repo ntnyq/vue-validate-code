@@ -161,11 +161,23 @@ function handleValidateFail() {
             </ElCol>
             <ElCol :md="6">
               <ElFormItem
-                :label="t('autoUpdate')"
-                prop="autoUpdate"
+                :label="t('updateOnChange')"
+                prop="updateOnChange"
               >
                 <ElSwitch
-                  v-model="config.autoUpdate"
+                  v-model="config.updateOnChange"
+                  :active-text="t('yes')"
+                  :inactive-text="t('no')"
+                />
+              </ElFormItem>
+            </ElCol>
+            <ElCol :md="6">
+              <ElFormItem
+                :label="t('updateOnClick')"
+                prop="updateOnClick"
+              >
+                <ElSwitch
+                  v-model="config.updateOnClick"
                   :active-text="t('yes')"
                   :inactive-text="t('no')"
                 />

@@ -31,7 +31,6 @@ export type Emits = {
  * @see {@link https://vue-validate-code.ntnyq.com/guide/#props}
  */
 export type Props = {
-  autoUpdate?: boolean
   bgColors?: string[]
   caseSensitive?: boolean
   chars?: string
@@ -53,5 +52,23 @@ export type Props = {
   minFontAngle?: number
   minFontSize?: number
   minLineWidth?: number
+
+  /**
+   * Canvas padding
+   *
+   * @default 10
+   */
   padding?: number
+
+  /**
+   * Update code when props change
+   */
+  updateOnChange?: boolean
+
+  /**
+   * Update code when click
+   *
+   * @default true
+   */
+  updateOnClick?: boolean
 }
