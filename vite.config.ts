@@ -6,7 +6,7 @@ const FORMAT_TO_FILENAME = {
   cjs: 'index.cjs',
   es: 'index.mjs',
   umd: 'index.js',
-}
+} as const
 
 export default defineConfig({
   build: {
@@ -31,6 +31,7 @@ export default defineConfig({
   },
   plugins: [
     Dts({
+      cleanVueFileName: true,
       insertTypesEntry: true,
       rollupTypes: true,
       strictOutput: true,
