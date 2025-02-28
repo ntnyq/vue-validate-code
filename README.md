@@ -9,15 +9,15 @@
 ## Install
 
 ```shell
-npm i vite-plugin-starter
+npm i vue-validate-code
 ```
 
 ```shell
-yarn add vite-plugin-starter
+yarn add vue-validate-code
 ```
 
 ```shell
-pnpm add vite-plugin-starter
+pnpm add vue-validate-code
 ```
 
 ## Usage

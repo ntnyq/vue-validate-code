@@ -62,6 +62,8 @@ export type Props = {
 
   /**
    * Update code when props change
+   *
+   * @default true
    */
   updateOnChange?: boolean
 

@@ -15,7 +15,9 @@ export default defineConfig({
     exclude: ['vitepress'],
   },
   plugins: [
-    UnoCSS(),
+    UnoCSS({
+      inspector: false,
+    }),
     AutoImport({
       dts: resolve('./auto-imports.d.ts'),
       imports: ['vue', '@vueuse/core'],

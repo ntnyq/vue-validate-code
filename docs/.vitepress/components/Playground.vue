@@ -279,7 +279,7 @@ function handleValidateFail() {
               >
                 <ElInputNumber
                   v-model="config.minFontAngle"
-                  :min="-40"
+                  :min="-50"
                   :max="0"
                   class="w-full"
                   controls-position="right"
@@ -294,7 +294,7 @@ function handleValidateFail() {
                 <ElInputNumber
                   v-model="config.maxFontAngle"
                   :min="0"
-                  :max="40"
+                  :max="50"
                   class="w-full"
                   controls-position="right"
                 />
@@ -307,8 +307,8 @@ function handleValidateFail() {
               >
                 <ElInputNumber
                   v-model="config.fontCount"
-                  :min="2"
-                  :max="8"
+                  :min="1"
+                  :max="10"
                   class="w-full"
                   controls-position="right"
                 />
@@ -362,8 +362,8 @@ function handleValidateFail() {
               >
                 <ElInputNumber
                   v-model="config.lineCount"
-                  :min="2"
-                  :max="8"
+                  :min="1"
+                  :max="20"
                   class="w-full"
                   controls-position="right"
                 />
@@ -417,8 +417,8 @@ function handleValidateFail() {
               >
                 <ElInputNumber
                   v-model="config.dotCount"
-                  :min="2"
-                  :max="8"
+                  :min="1"
+                  :max="20"
                   class="w-full"
                   controls-position="right"
                 />
