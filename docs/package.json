@@ -16,7 +16,7 @@
   "devDependencies": {
     "@iconify-json/ri": "^1.2.5",
     "@shikijs/vitepress-twoslash": "^3.3.0",
-    "unocss": "^66.1.0-beta.12",
+    "unocss": "^66.1.0",
     "unplugin-auto-import": "^19.1.2",
     "unplugin-vue-components": "^28.5.0",
     "vite": "catalog:",
