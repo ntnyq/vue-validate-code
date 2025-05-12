@@ -65,11 +65,11 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "@ntnyq/eslint-config": "^4.1.0",
+    "@ntnyq/eslint-config": "^4.2.0",
     "@ntnyq/prettier-config": "^2.0.0",
-    "@ntnyq/utils": "^0.6.4",
-    "@types/node": "^22.15.3",
-    "@vitejs/plugin-vue": "^5.2.3",
+    "@ntnyq/utils": "^0.7.0",
+    "@types/node": "^22.15.17",
+    "@vitejs/plugin-vue": "^5.2.4",
     "@vitest/coverage-v8": "catalog:",
     "@vue/test-utils": "^2.4.6",
     "bumpp": "^10.1.0",
