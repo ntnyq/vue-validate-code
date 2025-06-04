@@ -180,7 +180,9 @@ export function useValidateCode(
   function render() {
     const element = unref(canvasRef)
 
-    if (!element || !element.parentNode) return
+    if (!element || !element.parentNode) {
+      return
+    }
 
     const { width, height } = (
       element.parentNode as HTMLElement
@@ -194,7 +196,9 @@ export function useValidateCode(
   }
 
   watch(config, newConfig => {
-    if (!newConfig.updateOnChange) return
+    if (!newConfig.updateOnChange) {
+      return
+    }
     update()
   })
 

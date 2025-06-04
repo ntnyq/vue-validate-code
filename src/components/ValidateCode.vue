@@ -31,7 +31,9 @@ const {
 )
 
 function handleClick() {
-  if (!config.value.updateOnClick) return
+  if (!config.value.updateOnClick) {
+    return
+  }
   update()
 }
 function validate(input: string) {

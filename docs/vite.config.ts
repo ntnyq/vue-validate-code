@@ -1,5 +1,4 @@
 import path from 'node:path'
-import { fileURLToPath, URL } from 'node:url'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -7,8 +6,8 @@ import VueComponents from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
-const resolve = (...args: string[]) => path.resolve(__dirname, ...args)
+const resolve = (...args: string[]): string =>
+  path.resolve(import.meta.dirname, ...args)
 
 export default defineConfig({
   optimizeDeps: {
