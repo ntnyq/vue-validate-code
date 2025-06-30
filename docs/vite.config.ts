@@ -11,7 +11,7 @@ const resolve = (...args: string[]): string =>
 
 export default defineConfig({
   optimizeDeps: {
-    exclude: ['vitepress'],
+    exclude: ['vitepress', 'element-plus'],
   },
   plugins: [
     UnoCSS({
