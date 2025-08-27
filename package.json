@@ -2,7 +2,7 @@
   "name": "vue-validate-code",
   "type": "module",
   "version": "0.0.10",
-  "packageManager": "pnpm@10.14.0",
+  "packageManager": "pnpm@10.15.0",
   "description": "Vue validate code",
   "keywords": [
     "validate",
@@ -61,8 +61,8 @@
   "devDependencies": {
     "@ntnyq/eslint-config": "^5.3.1",
     "@ntnyq/prettier-config": "^3.0.1",
-    "@ntnyq/utils": "^0.9.0",
-    "@types/node": "^24.2.1",
+    "@ntnyq/utils": "^0.9.1",
+    "@types/node": "^24.3.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/test-utils": "^2.4.6",
     "bumpp": "^10.2.3",
