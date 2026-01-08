@@ -29,6 +29,7 @@
     "headerbtn",
     "iconify",
     "iife",
+    "jsdom",
     "oxlint",
     "pnpm",
     "shikijs",

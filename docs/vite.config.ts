@@ -17,6 +17,7 @@ export default defineConfig({
     UnoCSS({
       inspector: false,
     }),
+
     AutoImport({
       dts: resolve('./auto-imports.d.ts'),
       imports: ['vue', '@vueuse/core'],
@@ -26,6 +27,7 @@ export default defineConfig({
         }),
       ],
     }),
+
     VueComponents({
       dirs: [resolve('./.vitepress/components')],
       dts: resolve('./components.d.ts'),
@@ -37,6 +39,7 @@ export default defineConfig({
         }),
       ],
     }),
+
     groupIconVitePlugin(),
   ],
   resolve: {
