@@ -6,6 +6,9 @@ import { zhSearch } from './zh'
 export const sharedConfig = defineConfig({
   lastUpdated: true,
   cleanUrls: true,
+  sitemap: {
+    hostname: appUrl,
+  },
   ignoreDeadLinks: true,
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],

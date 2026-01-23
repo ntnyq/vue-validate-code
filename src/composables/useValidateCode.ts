@@ -1,23 +1,27 @@
 import { cleanObject, randomHexColor, randomNumber } from '@ntnyq/utils'
 import { computed, ref, shallowRef, toValue, unref, watch } from 'vue'
-import { DEFAULT_CONFIG, loop, useGlobalConfig } from '../helpers'
+import { DEFAULT_CONFIG, useGlobalConfig } from '../helpers'
+import { createRenderer } from '../renderers'
 import type { MaybeRef, MaybeRefOrGetter } from 'vue'
 import type { Props } from '../helpers'
+import type {
+  Renderer,
+  RendererElement,
+  RendererType,
+  RenderSize,
+} from '../types/renderer'
 
-export interface CanvasSize {
-  width: number
-  height: number
-}
+export type CanvasSize = RenderSize
 
 export function useValidateCode(
-  canvasRef: MaybeRef<HTMLCanvasElement | null>,
+  elementRef: MaybeRef<RendererElement | null>,
   options: MaybeRefOrGetter<Props> = {},
 ) {
   const validateCode = ref('')
-
-  const canvasElement = shallowRef<HTMLCanvasElement>(undefined!)
-  const canvasContext = shallowRef<CanvasRenderingContext2D>(undefined!)
-  const canvasSize = shallowRef<CanvasSize>({ width: 0, height: 0 })
+  const renderElement = shallowRef<RendererElement>(undefined!)
+  const canvasSize = shallowRef<RenderSize>({ width: 0, height: 0 })
+  const currentRendererType = shallowRef<RendererType>('canvas')
+  const renderer = shallowRef<Renderer | null>(null)
 
   const defaultConfig = {
     ...DEFAULT_CONFIG,
@@ -28,6 +32,7 @@ export function useValidateCode(
     ...defaultConfig,
     ...cleanObject(toValue(options)),
   }))
+
   const resolvedChars = computed(() =>
     config.value.chars.length ? config.value.chars : DEFAULT_CONFIG.chars,
   )
@@ -50,106 +55,43 @@ export function useValidateCode(
     return randomHexColor()
   }
 
-  function drawBg() {
-    const ctx = canvasContext.value
-
-    ctx.textBaseline = 'middle'
-    ctx.fillStyle = getColor(config.value.bgColors)
-    ctx.fillRect(0, 0, canvasSize.value.width, canvasSize.value.height)
+  function ensureRenderer(type: RendererType) {
+    if (!renderer.value || currentRendererType.value !== type) {
+      renderer.value?.destroy()
+      renderer.value = createRenderer(type, () => ({
+        config: config.value,
+        size: canvasSize.value,
+        resolvedChars: resolvedChars.value,
+        getColor,
+      }))
+      currentRendererType.value = type
+    }
+    return renderer.value
   }
 
-  function drawLines() {
-    const ctx = canvasContext.value
+  function ensureMountedRenderer() {
+    const element = unref(elementRef)
 
-    if (!config.value.hasLines) {
-      return
+    if (!element || !element.parentNode) {
+      return null
     }
 
-    loop(config.value.lineCount, () => {
-      ctx.strokeStyle = getColor(config.value.lineColors)
-      ctx.beginPath()
-      ctx.lineWidth = randomNumber(
-        config.value.minLineWidth,
-        config.value.maxLineWidth,
-      )
-      ctx.moveTo(
-        randomNumber(0, canvasSize.value.width),
-        randomNumber(0, canvasSize.value.height),
-      )
-      ctx.lineTo(
-        randomNumber(0, canvasSize.value.width),
-        randomNumber(0, canvasSize.value.height),
-      )
-      ctx.stroke()
-    })
-  }
+    const nextRenderer = ensureRenderer(config.value.renderer)
 
-  function drawDots() {
-    const ctx = canvasContext.value
-
-    if (!config.value.hasDots) {
-      return
+    if (renderElement.value !== element) {
+      renderElement.value = element
+      nextRenderer.mount(element)
     }
 
-    loop(config.value.dotCount, () => {
-      ctx.fillStyle = getColor(config.value.dotColors)
-      ctx.beginPath()
-      ctx.arc(
-        randomNumber(0, canvasSize.value.width),
-        randomNumber(0, canvasSize.value.height),
-        randomNumber(config.value.minDotRadius, config.value.maxDotRadius),
-        0,
-        Math.PI * 2,
-      )
-      ctx.fill()
-    })
-  }
-
-  function drawChars() {
-    const ctx = canvasContext.value
-    const chars: string[] = []
-
-    loop(config.value.fontCount, idx => {
-      const char = resolvedChars.value[randomNumber(resolvedChars.value.length)]
-      const fontSize = randomNumber(
-        config.value.minFontSize,
-        config.value.maxFontSize,
-      )
-      const columnWidth =
-        (canvasSize.value.width - config.value.padding * 2)
-        / config.value.fontCount
-      const x =
-        columnWidth * idx + config.value.padding + (columnWidth - fontSize) / 2
-      const y =
-        randomNumber(
-          canvasSize.value.height - config.value.padding * 2 - fontSize,
-        )
-        + config.value.padding
-        + fontSize / 2
-      const deg = randomNumber(
-        config.value.minFontAngle,
-        config.value.maxFontAngle,
-      )
-
-      ctx.fillStyle = getColor(config.value.fontColors)
-      ctx.font = `${fontSize}px ${config.value.fontFamily}`
-      ctx.save()
-      ctx.translate(x, y)
-      ctx.rotate((deg * Math.PI) / 180)
-      ctx.fillText(char, 0, 0)
-      ctx.restore()
-
-      chars.push(char)
-    })
-
-    validateCode.value = chars.join('')
+    return { element, renderer: nextRenderer }
   }
 
   function update() {
-    drawBg()
-    drawLines()
-    drawDots()
-    drawChars()
+    const mounted = ensureMountedRenderer()
+    if (!mounted) {
+      return
+    }
+    validateCode.value = mounted.renderer.update()
   }
 
   function validate(input: string) {
@@ -159,37 +101,29 @@ export function useValidateCode(
   }
 
   function destroy() {
-    canvasContext.value.clearRect(
-      0,
-      0,
-      canvasSize.value.width,
-      canvasSize.value.height,
-    )
+    renderer.value?.destroy()
+
     validateCode.value = ''
-    canvasElement.value = undefined!
-    canvasContext.value = undefined!
+    renderElement.value = undefined!
+    renderer.value = null
     canvasSize.value = { width: 0, height: 0 }
   }
 
-  function resize(size: CanvasSize) {
-    canvasElement.value.width = size.width
-    canvasElement.value.height = size.height
+  function resize(size: RenderSize) {
     canvasSize.value = size
+    renderer.value?.resize(size)
   }
 
   function render() {
-    const element = unref(canvasRef)
+    const mounted = ensureMountedRenderer()
 
-    if (!element || !element.parentNode) {
+    if (!mounted) {
       return
     }
 
     const { width, height } = (
-      element.parentNode as HTMLElement
+      mounted.element.parentNode as HTMLElement
     ).getBoundingClientRect()
-
-    canvasContext.value = element.getContext('2d') as CanvasRenderingContext2D
-    canvasElement.value = element
 
     resize({ width, height })
     update()
@@ -199,13 +133,13 @@ export function useValidateCode(
     if (!newConfig.updateOnChange) {
       return
     }
-    update()
+    render()
   })
 
   return {
     config,
     canvasSize,
-    canvasElement,
+    renderElement,
     validateCode,
 
     render,

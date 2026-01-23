@@ -1,4 +1,5 @@
 {
+  "canvas": "Canvas",
   "caseSensitive": "CaseSensitive",
   "chars": "Chars",
   "dotCount": "DotCount",
@@ -26,6 +27,8 @@
   "placeholderCode": "Fill Code",
   "renderDots": "RenderDots",
   "renderLines": "RenderLines",
+  "renderer": "Renderer",
+  "svg": "SVG",
   "titleNotice": "Notice",
   "titleValidateResult": "ValidateResult",
   "update": "Update",

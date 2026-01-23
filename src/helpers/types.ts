@@ -1,3 +1,5 @@
+import type { RendererType } from '../types/renderer'
+
 /**
  * The events of component `ValidateCode`
  *
@@ -59,6 +61,13 @@ export type Props = {
    * @default 10
    */
   padding?: number
+
+  /**
+   * Render engine type: 'canvas' or 'svg'
+   *
+   * @default 'canvas'
+   */
+  renderer?: RendererType
 
   /**
    * Update code when props change

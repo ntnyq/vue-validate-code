@@ -10,6 +10,7 @@ export const plugin: Plugin = {
   },
 }
 
+export * from './types'
 export * from './helpers'
 
 export { ValidateCode }

@@ -33,7 +33,7 @@ function handleTriggerValidate() {
   if (!validateCode.value) {
     return console.log('No validate code value')
   }
-  cvalidateCodeRef.value?.validate(validateCode.value)
+  validateCodeRef.value?.validate(validateCode.value)
 }
 function handleValidateCallback(isValid) {
   if (isValid) {
@@ -49,6 +49,7 @@ function handleValidateCallback(isValid) {
   <ValidateCode
     @validate="handleValidateCallback"
     ref="validateCodeRef"
+    renderer="svg"
   />
   <input
     v-model="validateCode"
@@ -61,6 +62,19 @@ function handleValidateCallback(isValid) {
     Validate
   </button>
 </template>
+```
+
+## Renderer
+
+`ValidateCode` supports two built-in renderers:
+
+- `canvas` (default)
+- `svg`
+
+```vue
+<ValidateCode renderer="canvas" />
+
+<ValidateCode renderer="svg" />
 ```
 
 ## Docs

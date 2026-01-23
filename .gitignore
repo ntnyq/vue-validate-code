@@ -13,3 +13,6 @@ coverage
 **/.vitepress/temp
 
 *.tsbuildinfo
+
+# pnpm
+**/.pnpm-store/**

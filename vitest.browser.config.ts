@@ -4,7 +4,6 @@ import { playwright } from '@vitest/browser-playwright'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
-  // @ts-expect-error vite v8 compatibility
   plugins: [Vue()],
   test: {
     environment: 'jsdom',

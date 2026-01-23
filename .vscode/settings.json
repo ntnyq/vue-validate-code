@@ -43,6 +43,7 @@
     "vitest",
     "vmax",
     "vmin",
-    "vueuse"
+    "vueuse",
+    "ZINDEX"
   ]
 }

@@ -25,6 +25,7 @@ export const DEFAULT_CONFIG = Object.freeze<Required<Props>>({
   maxDotRadius: 3,
   hasDots: true,
   hasLines: true,
+  renderer: 'canvas',
   updateOnChange: true,
   updateOnClick: true,
 })

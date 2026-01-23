@@ -28,6 +28,16 @@ const fontFamilyOptions: OptionType[] = [
     value: 'SimHei',
   },
 ]
+const rendererOptions = computed<OptionType[]>(() => [
+  {
+    label: t('canvas'),
+    value: 'canvas',
+  },
+  {
+    label: t('svg'),
+    value: 'svg',
+  },
+])
 
 function handleUpdate() {
   validateCodeRef.value?.update()
@@ -59,7 +69,7 @@ function handleValidateFail() {
 </script>
 
 <template>
-  <div class="relative select-none">
+  <div class="select-none relative">
     <ElConfigProvider :locale="epLocale">
       <ElRow
         :gutter="20"
@@ -67,7 +77,7 @@ function handleValidateFail() {
         class="mb-4"
       >
         <ElCol :md="16">
-          <div class="h-200px flex-center">
+          <div class="flex-center h-200px">
             <div class="h-80px w-240px cursor-pointer">
               <ClientOnly>
                 <ValidateCode
@@ -81,7 +91,7 @@ function handleValidateFail() {
           </div>
         </ElCol>
         <ElCol :md="8">
-          <div class="relative mb-4">
+          <div class="mb-4 relative">
             <ElInput
               v-model:model-value="validateCode"
               :maxlength="config.fontCount"
@@ -126,13 +136,24 @@ function handleValidateFail() {
       </ElRow>
       <ElForm :model="config">
         <div class="relative">
-          <div class="flex items-center justify-between py-2">
-            <h2 class="font-semibold !m-0 !border-none !p-0 !text-lg">
+          <div class="py-2 flex items-center justify-between">
+            <h2 class="font-semibold !text-lg !m-0 !p-0 !border-none">
               {{ t('globalSettings') }}
             </h2>
           </div>
 
           <ElRow :gutter="20">
+            <ElCol :md="6">
+              <ElFormItem
+                :label="t('renderer')"
+                prop="renderer"
+              >
+                <ElSelectV2
+                  v-model="config.renderer"
+                  :options="rendererOptions"
+                />
+              </ElFormItem>
+            </ElCol>
             <ElCol :md="6">
               <ElFormItem
                 :label="t('padding')"
@@ -211,8 +232,8 @@ function handleValidateFail() {
         </div>
 
         <div class="relative">
-          <div class="flex items-center justify-between py-2">
-            <h2 class="font-semibold !m-0 !border-none !p-0 !text-lg">
+          <div class="py-2 flex items-center justify-between">
+            <h2 class="font-semibold !text-lg !m-0 !p-0 !border-none">
               {{ t('fontSettings') }}
             </h2>
           </div>
@@ -321,8 +342,8 @@ function handleValidateFail() {
           v-if="config.hasLines"
           class="relative"
         >
-          <div class="flex items-center justify-between py-2">
-            <h2 class="font-semibold !m-0 !border-none !p-0 !text-lg">
+          <div class="py-2 flex items-center justify-between">
+            <h2 class="font-semibold !text-lg !m-0 !p-0 !border-none">
               {{ t('lineSettings') }}
             </h2>
           </div>
@@ -376,8 +397,8 @@ function handleValidateFail() {
           v-if="config.hasDots"
           class="relative"
         >
-          <div class="flex items-center justify-between py-2">
-            <h2 class="font-semibold !m-0 !border-none !p-0 !text-lg">
+          <div class="py-2 flex items-center justify-between">
+            <h2 class="font-semibold !text-lg !m-0 !p-0 !border-none">
               {{ t('dotSettings') }}
             </h2>
           </div>

@@ -38,7 +38,7 @@ function handleTriggerValidate() {
   if (!validateCode.value) {
     return console.log('未输入验证码')
   }
-  cvalidateCodeRef.value?.validate(validateCode.value)
+  validateCodeRef.value?.validate(validateCode.value)
 }
 function handleValidateCallback(isValid) {
   if (isValid) {
@@ -54,6 +54,7 @@ function handleValidateCallback(isValid) {
   <ValidateCode
     @validate="handleValidateCallback"
     ref="validateCodeRef"
+    renderer="svg"
   />
   <input
     v-model="validateCode"
@@ -66,6 +67,19 @@ function handleValidateCallback(isValid) {
     校验
   </button>
 </template>
+```
+
+### 渲染器
+
+`ValidateCode` 内置两种渲染器：
+
+- `canvas`（默认）
+- `svg`
+
+```vue
+<ValidateCode renderer="canvas" />
+
+<ValidateCode renderer="svg" />
 ```
 
 ### 作为插件使用
@@ -99,6 +113,13 @@ app.mount('#app')
 - **默认值**: `10`
 
 画布内间距。
+
+### renderer
+
+- **类型**: `'canvas' | 'svg'`
+- **默认值**: `'canvas'`
+
+渲染引擎类型。
 
 ### updateOnChange
 

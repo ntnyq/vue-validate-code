@@ -1,4 +1,5 @@
 {
+  "canvas": "Canvas",
   "caseSensitive": "大小写敏感",
   "chars": "字符集",
   "dotCount": "圆点数量",
@@ -26,6 +27,8 @@
   "placeholderCode": "请输入验证码",
   "renderDots": "渲染圆点",
   "renderLines": "渲染线条",
+  "renderer": "渲染器",
+  "svg": "SVG",
   "titleNotice": "提示",
   "titleValidateResult": "校验结果",
   "update": "更新",
