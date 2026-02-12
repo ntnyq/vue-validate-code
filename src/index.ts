@@ -1,6 +1,6 @@
+import type { Plugin } from 'vue'
 import { ValidateCode } from './components'
 import { injectGlobalConfig } from './helpers'
-import type { Plugin } from 'vue'
 import type { Props } from './helpers'
 
 export const plugin: Plugin = {

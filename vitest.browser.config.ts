@@ -8,8 +8,7 @@ export default defineConfig({
   plugins: [Vue()],
   test: {
     environment: 'jsdom',
-    include: ['**\/*.browser.ts'],
-    setupFiles: ['./vitest.browser.setup.ts'],
+    include: ['**/*.browser.ts'],
     browser: {
       enabled: true,
       headless: process.env.CI === 'true',

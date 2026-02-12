@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { version } from '../../../package.json'
-import { appDescription, appTitle, packageName } from './meta'
+import { appDescription, REPOSITORY_SLUG, appTitle } from './meta'
 
 export const enConfig = defineConfig({
   title: appTitle,
@@ -13,7 +13,7 @@ export const enConfig = defineConfig({
 
     editLink: {
       text: 'Suggest changes to this page',
-      pattern: `https://github.com/ntnyq/${packageName}/edit/main/docs/:path`,
+      pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
     },
 
     nav: [
@@ -25,7 +25,7 @@ export const enConfig = defineConfig({
           { text: `v${version} (current)`, link: '/' },
           {
             text: 'Release Notes',
-            link: `https://github.com/ntnyq/${packageName}/releases`,
+            link: `https://github.com/${REPOSITORY_SLUG}/releases`,
           },
         ],
       },

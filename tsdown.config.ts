@@ -5,6 +5,8 @@ export default defineConfig({
   clean: true,
   entry: ['src/index.ts'],
   platform: 'neutral',
+  minify: 'dce-only',
+  inlineOnly: ['@ntnyq/utils'],
   dts: {
     vue: true,
   },

@@ -9,48 +9,53 @@ import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 const resolve = (...args: string[]): string =>
   path.resolve(import.meta.dirname, ...args)
 
-export default defineConfig({
-  optimizeDeps: {
-    exclude: ['vitepress', 'element-plus'],
-  },
-  plugins: [
-    UnoCSS({
-      inspector: false,
-    }),
+export default defineConfig(({ command }) => {
+  const isProduction = command === 'build'
+  return {
+    optimizeDeps: {
+      exclude: ['vitepress'],
+    },
+    plugins: [
+      UnoCSS({
+        inspector: false,
+      }),
 
-    AutoImport({
-      dts: resolve('./auto-imports.d.ts'),
-      imports: ['vue', '@vueuse/core'],
-      resolvers: [
-        ElementPlusResolver({
-          importStyle: false,
-        }),
-      ],
-    }),
+      AutoImport({
+        dts: resolve('./auto-imports.d.ts'),
+        imports: ['vue', '@vueuse/core'],
+        dtsMode: isProduction ? 'overwrite' : 'append',
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: false,
+          }),
+        ],
+      }),
 
-    VueComponents({
-      dirs: [resolve('./.vitepress/components')],
-      dts: resolve('./components.d.ts'),
-      extensions: ['vue', 'md'],
-      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      resolvers: [
-        ElementPlusResolver({
-          importStyle: false,
-        }),
-      ],
-    }),
+      VueComponents({
+        dirs: [resolve('./.vitepress/components')],
+        dts: resolve('./components.d.ts'),
+        syncMode: isProduction ? 'overwrite' : 'append',
+        extensions: ['vue', 'md'],
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+        resolvers: [
+          ElementPlusResolver({
+            importStyle: false,
+          }),
+        ],
+      }),
 
-    groupIconVitePlugin(),
-  ],
-  resolve: {
-    alias: [
-      // {
-      // find: /^.*\/VPSwitchAppearance\.vue$/,
-      // replacement: fileURLToPath(new URL('./theme/components/VPSwitchAppearance/index.vue', import.meta.url)),
-      // },
+      groupIconVitePlugin(),
     ],
-  },
-  ssr: {
-    noExternal: ['element-plus'],
-  },
+    resolve: {
+      alias: [
+        // {
+        // find: /^.*\/VPSwitchAppearance\.vue$/,
+        // replacement: fileURLToPath(new URL('./theme/components/VPSwitchAppearance/index.vue', import.meta.url)),
+        // },
+      ],
+    },
+    ssr: {
+      noExternal: ['element-plus'],
+    },
+  }
 })
