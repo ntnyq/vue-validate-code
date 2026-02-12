@@ -1,6 +1,12 @@
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
-import { appDescription, appTitle, appUrl, packageName } from './meta'
+import {
+  appDescription,
+  appTitle,
+  REPOSITORY_SLUG,
+  appUrl,
+  PACKAGE_NAME,
+} from './meta'
 import { zhSearch } from './zh'
 
 export const sharedConfig = defineConfig({
@@ -29,8 +35,8 @@ export const sharedConfig = defineConfig({
 
     socialLinks: [
       { icon: 'x', link: 'https://twitter.com/ntnyq' },
-      { icon: 'npm', link: `https://www.npmjs.com/package/${packageName}` },
-      { icon: 'github', link: `https://github.com/ntnyq/${packageName}` },
+      { icon: 'npm', link: `https://www.npmjs.com/package/${PACKAGE_NAME}` },
+      { icon: 'github', link: `https://github.com/${REPOSITORY_SLUG}` },
     ],
   },
   markdown: {

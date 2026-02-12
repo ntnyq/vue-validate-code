@@ -36,6 +36,4 @@ export const injectGlobalConfig = (app: App, config: Props = {}) => {
   app.provide(GLOBAL_CONFIG_KEY, config)
 }
 
-export const useGlobalConfig = () => {
-  return inject(GLOBAL_CONFIG_KEY, {} as Props)
-}
+export const useGlobalConfig = () => inject(GLOBAL_CONFIG_KEY, {} as Props)

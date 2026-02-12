@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { ElNotification, ElSelectV2 } from 'element-plus'
+import type { OptionType } from 'element-plus/es/components/select-v2/src/select.types'
 import epEnLang from 'element-plus/es/locale/lang/en'
 import epZhCnLang from 'element-plus/es/locale/lang/zh-cn'
 import { useTemplateRef } from 'vue'
 import { DEFAULT_CONFIG, ValidateCode } from 'vue-validate-code'
-import { useLocale } from '../composables/useLocale'
-import type { OptionType } from 'element-plus/es/components/select-v2/src/select.types'
 import type { Props } from 'vue-validate-code'
+import { useLocale } from '../composables/useLocale'
 
 const { lang, t } = useLocale()
 

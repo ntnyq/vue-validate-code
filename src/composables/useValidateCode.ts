@@ -1,7 +1,7 @@
 import { cleanObject, randomHexColor, randomNumber } from '@ntnyq/utils'
 import { computed, ref, shallowRef, toValue, unref, watch } from 'vue'
-import { DEFAULT_CONFIG, loop, useGlobalConfig } from '../helpers'
 import type { MaybeRef, MaybeRefOrGetter } from 'vue'
+import { DEFAULT_CONFIG, loop, useGlobalConfig } from '../helpers'
 import type { Props } from '../helpers'
 
 export interface CanvasSize {
@@ -116,16 +116,16 @@ export function useValidateCode(
         config.value.maxFontSize,
       )
       const columnWidth =
-        (canvasSize.value.width - config.value.padding * 2)
-        / config.value.fontCount
+        (canvasSize.value.width - config.value.padding * 2) /
+        config.value.fontCount
       const x =
         columnWidth * idx + config.value.padding + (columnWidth - fontSize) / 2
       const y =
         randomNumber(
           canvasSize.value.height - config.value.padding * 2 - fontSize,
-        )
-        + config.value.padding
-        + fontSize / 2
+        ) +
+        config.value.padding +
+        fontSize / 2
       const deg = randomNumber(
         config.value.minFontAngle,
         config.value.maxFontAngle,
