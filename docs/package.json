@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@iconify-json/ri": "^1.2.10",
-    "@shikijs/vitepress-twoslash": "^3.23.0",
+    "@shikijs/vitepress-twoslash": "^4.0.1",
     "@vue/shared": "^3.5.29",
     "@vueuse/core": "^14.2.1",
     "element-plus": "^2.13.3",
