@@ -22,8 +22,8 @@ export default defineConfig(({ command }) => {
 
       AutoImport({
         dts: resolve('./auto-imports.d.ts'),
-        imports: ['vue', '@vueuse/core'],
         dtsMode: isProduction ? 'overwrite' : 'append',
+        imports: ['vue', '@vueuse/core'],
         resolvers: [
           ElementPlusResolver({
             importStyle: false,
@@ -34,7 +34,6 @@ export default defineConfig(({ command }) => {
       VueComponents({
         dirs: [resolve('./.vitepress/components')],
         dts: resolve('./components.d.ts'),
-        syncMode: isProduction ? 'overwrite' : 'append',
         extensions: ['vue', 'md'],
         include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
         resolvers: [
@@ -42,6 +41,7 @@ export default defineConfig(({ command }) => {
             importStyle: false,
           }),
         ],
+        syncMode: isProduction ? 'overwrite' : 'append',
       }),
 
       groupIconVitePlugin(),
@@ -49,8 +49,8 @@ export default defineConfig(({ command }) => {
     resolve: {
       alias: [
         // {
-        // find: /^.*\/VPSwitchAppearance\.vue$/,
-        // replacement: fileURLToPath(new URL('./theme/components/VPSwitchAppearance/index.vue', import.meta.url)),
+        // Find: /^.*\/VPSwitchAppearance\.vue$/,
+        // Replacement: fileURLToPath(new URL('./theme/components/VPSwitchAppearance/index.vue', import.meta.url)),
         // },
       ],
     },

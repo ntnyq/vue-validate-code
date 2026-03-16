@@ -18,8 +18,8 @@ export function useLocale() {
   }
 
   return {
-    lang,
     i18n,
+    lang,
     t,
   }
 }

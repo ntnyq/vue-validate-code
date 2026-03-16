@@ -1,10 +1,9 @@
 import { defineConfig } from 'vitepress'
 import type { DefaultTheme } from 'vitepress'
 import { version } from '../../../package.json'
-import { appDescriptionZh, REPOSITORY_SLUG, appTitleZh } from './meta'
+import { REPOSITORY_SLUG, appDescriptionZh, appTitleZh } from './meta'
 
 export const zhConfig = defineConfig({
-  title: appTitleZh,
   description: appDescriptionZh,
   themeConfig: {
     lastUpdated: {
@@ -41,20 +40,19 @@ export const zhConfig = defineConfig({
       },
     ],
   },
+  title: appTitleZh,
 })
 
 export const zhSearch: DefaultTheme.LocalSearchOptions['locales'] = {
   zh: {
     translations: {
       button: {
-        buttonText: '搜索文档',
         buttonAriaLabel: '搜索文档',
+        buttonText: '搜索文档',
       },
       modal: {
-        displayDetails: '显示详情',
-        resetButtonTitle: '重置',
         backButtonTitle: '返回',
-        noResultsText: '未找到结果',
+        displayDetails: '显示详情',
         footer: {
           selectText: '选择',
           selectKeyAriaLabel: '选择',
@@ -64,6 +62,8 @@ export const zhSearch: DefaultTheme.LocalSearchOptions['locales'] = {
           closeText: '关闭',
           closeKeyAriaLabel: '关闭',
         },
+        noResultsText: '未找到结果',
+        resetButtonTitle: '重置',
       },
     },
   },

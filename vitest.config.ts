@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [Vue()],
   test: {
     environment: 'jsdom',
-    setupFiles: ['./vitest.setup.ts'],
     environmentOptions: {
       jsdom: {
         resources: 'usable',
       },
     },
+    setupFiles: ['./vitest.setup.ts'],
   },
 })

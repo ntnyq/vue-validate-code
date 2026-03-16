@@ -1,18 +1,16 @@
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import {
+  PACKAGE_NAME,
+  REPOSITORY_SLUG,
   appDescription,
   appTitle,
-  REPOSITORY_SLUG,
   appUrl,
-  PACKAGE_NAME,
 } from './meta'
 import { zhSearch } from './zh'
 
 export const sharedConfig = defineConfig({
-  lastUpdated: true,
   cleanUrls: true,
-  ignoreDeadLinks: true,
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
@@ -24,6 +22,13 @@ export const sharedConfig = defineConfig({
     // ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     // ['meta', { name: 'twitter:image', content: `${appUrl}/og.png` }],
   ],
+  ignoreDeadLinks: true,
+  lastUpdated: true,
+  markdown: {
+    config(md) {
+      md.use(groupIconMdPlugin)
+    },
+  },
   themeConfig: {
     search: {
       provider: 'local',
@@ -38,10 +43,5 @@ export const sharedConfig = defineConfig({
       { icon: 'npm', link: `https://www.npmjs.com/package/${PACKAGE_NAME}` },
       { icon: 'github', link: `https://github.com/${REPOSITORY_SLUG}` },
     ],
-  },
-  markdown: {
-    config(md) {
-      md.use(groupIconMdPlugin)
-    },
   },
 })

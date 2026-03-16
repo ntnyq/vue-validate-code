@@ -7,8 +7,6 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  transformers: [transformerDirectives(), transformerVariantGroup()],
-
   presets: [
     presetWind3(),
     presetIcons({
@@ -25,4 +23,6 @@ export default defineConfig({
       'wh-full': 'w-full h-full',
     },
   ],
+
+  transformers: [transformerDirectives(), transformerVariantGroup()],
 })

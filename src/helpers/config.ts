@@ -3,28 +3,28 @@ import type { App, InjectionKey } from 'vue'
 import type { Props } from './types'
 
 export const DEFAULT_CONFIG = Object.freeze<Required<Props>>({
-  chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
-  padding: 10,
-  caseSensitive: true,
-  colors: [],
   bgColors: [],
+  caseSensitive: true,
+  chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
+  colors: [],
+  dotColors: [],
+  dotCount: 6,
+  fontColors: [],
   fontCount: 6,
   fontFamily: 'SimHei',
-  fontColors: [],
-  minFontSize: 20,
-  maxFontSize: 30,
-  minFontAngle: -30,
-  maxFontAngle: 30,
-  lineCount: 6,
-  lineColors: [],
-  minLineWidth: 1,
-  maxLineWidth: 2,
-  dotCount: 6,
-  dotColors: [],
-  minDotRadius: 1,
-  maxDotRadius: 3,
   hasDots: true,
   hasLines: true,
+  lineColors: [],
+  lineCount: 6,
+  maxDotRadius: 3,
+  maxFontAngle: 30,
+  maxFontSize: 30,
+  maxLineWidth: 2,
+  minDotRadius: 1,
+  minFontAngle: -30,
+  minFontSize: 20,
+  minLineWidth: 1,
+  padding: 10,
   updateOnChange: true,
   updateOnClick: true,
 })
@@ -36,6 +36,4 @@ export const injectGlobalConfig = (app: App, config: Props = {}) => {
   app.provide(GLOBAL_CONFIG_KEY, config)
 }
 
-export const useGlobalConfig = () => {
-  return inject(GLOBAL_CONFIG_KEY, {} as Props)
-}
+export const useGlobalConfig = () => inject(GLOBAL_CONFIG_KEY, {} as Props)

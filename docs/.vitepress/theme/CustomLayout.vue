@@ -9,7 +9,7 @@ const DefaultThemeLayout = DefaultTheme.Layout
 
 function supportViewTransition() {
   return (
-    !!document.startViewTransition &&
+    Boolean(document.startViewTransition) &&
     window.matchMedia('(prefers-reduced-motion: no-preference)').matches
   )
 }
@@ -34,11 +34,11 @@ provide('toggle-appearance', async ({ clientX: x, clientY: y }: MouseEvent) => {
   }).ready
 
   document.documentElement.animate(
-    { clipPath: isDark.value ? clipPath.reverse() : clipPath },
+    { clipPath: isDark.value ? clipPath.toReversed() : clipPath },
     {
       duration: 300,
-      fill: 'forwards',
       easing: 'ease-in',
+      fill: 'forwards',
       pseudoElement: `::view-transition-${isDark.value ? 'old' : 'new'}(root)`,
     },
   )

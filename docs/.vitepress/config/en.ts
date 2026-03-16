@@ -1,11 +1,9 @@
 import { defineConfig } from 'vitepress'
 import { version } from '../../../package.json'
-import { appDescription, REPOSITORY_SLUG, appTitle } from './meta'
+import { REPOSITORY_SLUG, appDescription, appTitle } from './meta'
 
 export const enConfig = defineConfig({
-  title: appTitle,
   description: appDescription,
-
   themeConfig: {
     outline: {
       level: [2, 4],
@@ -31,4 +29,6 @@ export const enConfig = defineConfig({
       },
     ],
   },
+
+  title: appTitle,
 })

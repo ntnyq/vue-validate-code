@@ -4,6 +4,9 @@ import { ValidateCode } from '../src'
 
 it('should render ValidateCode component', async () => {
   const screen = render(ValidateCode, {
+    attrs: {
+      'data-testid': 'validate-code',
+    },
     props: {
       length: 6,
       width: 120,
@@ -13,9 +16,6 @@ it('should render ValidateCode component', async () => {
       color: '#333333',
       lineCount: 5,
       dotCount: 30,
-    },
-    attrs: {
-      'data-testid': 'validate-code',
     },
   })
 

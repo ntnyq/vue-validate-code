@@ -7,8 +7,6 @@ export default defineConfig({
   // @ts-expect-error vite v8 compatibility
   plugins: [Vue()],
   test: {
-    environment: 'jsdom',
-    include: ['**/*.browser.ts'],
     browser: {
       enabled: true,
       headless: process.env.CI === 'true',
@@ -20,10 +18,12 @@ export default defineConfig({
         },
       ],
     },
+    environment: 'jsdom',
     environmentOptions: {
       jsdom: {
         resources: 'usable',
       },
     },
+    include: ['**/*.browser.ts'],
   },
 })
