@@ -1,26 +1,19 @@
 import { defineConfig } from 'vitepress'
 import { version } from '../../../package.json'
-import { appDescription, REPOSITORY_SLUG, appTitle } from './meta'
+import { REPOSITORY_SLUG, appDescription, appTitle } from './meta'
 
 export const enConfig = defineConfig({
-  title: appTitle,
   description: appDescription,
-
   themeConfig: {
-    outline: {
-      level: [2, 4],
-    },
-
     editLink: {
-      text: 'Suggest changes to this page',
       pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
+      text: 'Suggest changes to this page',
     },
 
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
+      { link: '/', text: 'Home' },
+      { link: '/guide/', text: 'Guide' },
       {
-        text: `v${version}`,
         items: [
           { text: `v${version} (current)`, link: '/' },
           {
@@ -28,7 +21,14 @@ export const enConfig = defineConfig({
             link: `https://github.com/${REPOSITORY_SLUG}/releases`,
           },
         ],
+        text: `v${version}`,
       },
     ],
+
+    outline: {
+      level: [2, 4],
+    },
   },
+
+  title: appTitle,
 })

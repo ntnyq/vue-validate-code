@@ -1,36 +1,41 @@
 import { defineConfig } from 'vitepress'
 import { groupIconMdPlugin } from 'vitepress-plugin-group-icons'
 import {
+  PACKAGE_NAME,
+  REPOSITORY_SLUG,
   appDescription,
   appTitle,
-  REPOSITORY_SLUG,
   appUrl,
-  PACKAGE_NAME,
 } from './meta'
 import { zhSearch } from './zh'
 
 export const sharedConfig = defineConfig({
-  lastUpdated: true,
   cleanUrls: true,
-  ignoreDeadLinks: true,
   head: [
-    ['link', { rel: 'icon', href: '/favicon.ico' }],
-    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }],
-    ['meta', { name: 'theme-color', href: '#ffffff' }],
-    ['meta', { property: 'og:type', content: 'website' }],
-    ['meta', { property: 'og:title', content: appTitle }],
-    ['meta', { property: 'og:url', content: appUrl }],
-    ['meta', { property: 'og:description', content: appDescription }],
+    ['link', { href: '/favicon.ico', rel: 'icon' }],
+    ['link', { href: '/apple-touch-icon.png', rel: 'apple-touch-icon' }],
+    ['meta', { href: '#ffffff', name: 'theme-color' }],
+    ['meta', { content: 'website', property: 'og:type' }],
+    ['meta', { content: appTitle, property: 'og:title' }],
+    ['meta', { content: appUrl, property: 'og:url' }],
+    ['meta', { content: appDescription, property: 'og:description' }],
     // ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     // ['meta', { name: 'twitter:image', content: `${appUrl}/og.png` }],
   ],
+  ignoreDeadLinks: true,
+  lastUpdated: true,
+  markdown: {
+    config(md) {
+      md.use(groupIconMdPlugin)
+    },
+  },
   themeConfig: {
     search: {
-      provider: 'local',
       options: {
         detailedView: true,
         locales: { ...zhSearch },
       },
+      provider: 'local',
     },
 
     socialLinks: [
@@ -38,10 +43,5 @@ export const sharedConfig = defineConfig({
       { icon: 'npm', link: `https://www.npmjs.com/package/${PACKAGE_NAME}` },
       { icon: 'github', link: `https://github.com/${REPOSITORY_SLUG}` },
     ],
-  },
-  markdown: {
-    config(md) {
-      md.use(groupIconMdPlugin)
-    },
   },
 })

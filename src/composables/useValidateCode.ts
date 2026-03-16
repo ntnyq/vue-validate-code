@@ -17,7 +17,7 @@ export function useValidateCode(
 
   const canvasElement = shallowRef<HTMLCanvasElement>(undefined!)
   const canvasContext = shallowRef<CanvasRenderingContext2D>(undefined!)
-  const canvasSize = shallowRef<CanvasSize>({ width: 0, height: 0 })
+  const canvasSize = shallowRef<CanvasSize>({ height: 0, width: 0 })
 
   const defaultConfig = {
     ...DEFAULT_CONFIG,
@@ -29,11 +29,11 @@ export function useValidateCode(
     ...cleanObject(toValue(options)),
   }))
   const resolvedChars = computed(() =>
-    config.value.chars.length ? config.value.chars : DEFAULT_CONFIG.chars,
+    config.value.chars.length > 0 ? config.value.chars : DEFAULT_CONFIG.chars,
   )
 
   function getColor(colors: string[] = []) {
-    if (colors.length) {
+    if (colors.length > 0) {
       return colors.length === 1
         ? colors[0]
         : colors[randomNumber(0, colors.length)]
@@ -41,7 +41,7 @@ export function useValidateCode(
 
     const globalColors = config.value.colors
 
-    if (globalColors.length) {
+    if (globalColors.length > 0) {
       return globalColors.length === 1
         ? globalColors[0]
         : globalColors[randomNumber(0, globalColors.length)]
@@ -168,7 +168,7 @@ export function useValidateCode(
     validateCode.value = ''
     canvasElement.value = undefined!
     canvasContext.value = undefined!
-    canvasSize.value = { width: 0, height: 0 }
+    canvasSize.value = { height: 0, width: 0 }
   }
 
   function resize(size: CanvasSize) {
@@ -191,7 +191,7 @@ export function useValidateCode(
     canvasContext.value = element.getContext('2d') as CanvasRenderingContext2D
     canvasElement.value = element
 
-    resize({ width, height })
+    resize({ height, width })
     update()
   }
 
@@ -203,15 +203,15 @@ export function useValidateCode(
   })
 
   return {
-    config,
-    canvasSize,
     canvasElement,
-    validateCode,
+    canvasSize,
+    config,
+    destroy,
 
     render,
-    destroy,
     resize,
     update,
     validate,
+    validateCode,
   }
 }

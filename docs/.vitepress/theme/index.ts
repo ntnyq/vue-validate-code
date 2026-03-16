@@ -11,9 +11,9 @@ import { h } from 'vue'
 import CustomLayout from './CustomLayout.vue'
 
 export default {
-  extends: DefaultTheme,
   Layout: () => h(CustomLayout),
   enhanceApp({ app }) {
     app.use(TwoSlash)
   },
+  extends: DefaultTheme,
 } satisfies Theme

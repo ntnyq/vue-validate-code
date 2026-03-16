@@ -3,7 +3,7 @@
  */
 
 /**
- * npm package name, it's unique
+ * Npm package name, it's unique
  */
 export const PACKAGE_NAME = 'vue-validate-code'
 

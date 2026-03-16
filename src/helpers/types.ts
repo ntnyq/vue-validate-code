@@ -3,7 +3,7 @@
  *
  * @see {@link https://vue-validate-code.ntnyq.com/guide/#events}
  */
-export type Emits = {
+export interface Emits {
   /**
    * Triggered when validate method return `false`
    */
@@ -30,7 +30,7 @@ export type Emits = {
  *
  * @see {@link https://vue-validate-code.ntnyq.com/guide/#props}
  */
-export type Props = {
+export interface Props {
   bgColors?: string[]
   caseSensitive?: boolean
   chars?: string

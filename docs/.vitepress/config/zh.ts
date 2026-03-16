@@ -1,36 +1,29 @@
 import { defineConfig } from 'vitepress'
 import type { DefaultTheme } from 'vitepress'
 import { version } from '../../../package.json'
-import { appDescriptionZh, REPOSITORY_SLUG, appTitleZh } from './meta'
+import { REPOSITORY_SLUG, appDescriptionZh, appTitleZh } from './meta'
 
 export const zhConfig = defineConfig({
-  title: appTitleZh,
   description: appDescriptionZh,
   themeConfig: {
+    docFooter: {
+      next: '下一页',
+      prev: '上一页',
+    },
+
+    editLink: {
+      pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
+      text: '对本页提出修改建议',
+    },
+
     lastUpdated: {
       text: '最近更新时间',
     },
 
-    outline: {
-      level: [2, 4],
-      label: '本页内容',
-    },
-
-    docFooter: {
-      prev: '上一页',
-      next: '下一页',
-    },
-
-    editLink: {
-      text: '对本页提出修改建议',
-      pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
-    },
-
     nav: [
-      { text: '首页', link: '/zh/' },
-      { text: '指南', link: '/zh/guide/' },
+      { link: '/zh/', text: '首页' },
+      { link: '/zh/guide/', text: '指南' },
       {
-        text: `v${version}`,
         items: [
           { text: `v${version} (当前)`, link: '/zh/' },
           {
@@ -38,32 +31,39 @@ export const zhConfig = defineConfig({
             link: `https://github.com/${REPOSITORY_SLUG}/releases`,
           },
         ],
+        text: `v${version}`,
       },
     ],
+
+    outline: {
+      label: '本页内容',
+      level: [2, 4],
+    },
   },
+  title: appTitleZh,
 })
 
 export const zhSearch: DefaultTheme.LocalSearchOptions['locales'] = {
   zh: {
     translations: {
       button: {
-        buttonText: '搜索文档',
         buttonAriaLabel: '搜索文档',
+        buttonText: '搜索文档',
       },
       modal: {
-        displayDetails: '显示详情',
-        resetButtonTitle: '重置',
         backButtonTitle: '返回',
-        noResultsText: '未找到结果',
+        displayDetails: '显示详情',
         footer: {
-          selectText: '选择',
-          selectKeyAriaLabel: '选择',
+          closeKeyAriaLabel: '关闭',
+          closeText: '关闭',
+          navigateDownKeyAriaLabel: '向下切换',
           navigateText: '切换',
           navigateUpKeyAriaLabel: '向上切换',
-          navigateDownKeyAriaLabel: '向下切换',
-          closeText: '关闭',
-          closeKeyAriaLabel: '关闭',
+          selectKeyAriaLabel: '选择',
+          selectText: '选择',
         },
+        noResultsText: '未找到结果',
+        resetButtonTitle: '重置',
       },
     },
   },

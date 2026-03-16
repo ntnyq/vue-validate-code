@@ -15,8 +15,8 @@ const validateCodeRef = useTemplateRef('validateCodeRef')
 const validateCode = ref('')
 const config = ref<Props>({
   ...DEFAULT_CONFIG,
-  minFontSize: 40,
   maxFontSize: 70,
+  minFontSize: 40,
 })
 
 const isZhCn = computed(() => lang.value === 'zh-CN')
@@ -36,8 +36,8 @@ function handleUpdate() {
 function handleValidate() {
   if (!validateCode.value) {
     return ElNotification.warning({
-      title: t('titleNotice'),
       message: t('messageFillValidateCode'),
+      title: t('titleNotice'),
     })
   }
 
@@ -45,14 +45,14 @@ function handleValidate() {
 }
 function handleValidateSuccess() {
   ElNotification.success({
-    title: t('titleValidateResult'),
     message: t('messageValidateSuccess'),
+    title: t('titleValidateResult'),
   })
 }
 function handleValidateFail() {
   ElNotification.success({
-    title: t('titleValidateResult'),
     message: t('messageValidateFail'),
+    title: t('titleValidateResult'),
   })
   handleUpdate()
 }
