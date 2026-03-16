@@ -6,15 +6,14 @@ export const enConfig = defineConfig({
   description: appDescription,
   themeConfig: {
     editLink: {
-      text: 'Suggest changes to this page',
       pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
+      text: 'Suggest changes to this page',
     },
 
     nav: [
-      { text: 'Home', link: '/' },
-      { text: 'Guide', link: '/guide/' },
+      { link: '/', text: 'Home' },
+      { link: '/guide/', text: 'Guide' },
       {
-        text: `v${version}`,
         items: [
           { text: `v${version} (current)`, link: '/' },
           {
@@ -22,6 +21,7 @@ export const enConfig = defineConfig({
             link: `https://github.com/${REPOSITORY_SLUG}/releases`,
           },
         ],
+        text: `v${version}`,
       },
     ],
 

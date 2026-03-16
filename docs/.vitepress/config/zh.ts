@@ -7,13 +7,13 @@ export const zhConfig = defineConfig({
   description: appDescriptionZh,
   themeConfig: {
     docFooter: {
-      prev: '上一页',
       next: '下一页',
+      prev: '上一页',
     },
 
     editLink: {
-      text: '对本页提出修改建议',
       pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
+      text: '对本页提出修改建议',
     },
 
     lastUpdated: {
@@ -21,10 +21,9 @@ export const zhConfig = defineConfig({
     },
 
     nav: [
-      { text: '首页', link: '/zh/' },
-      { text: '指南', link: '/zh/guide/' },
+      { link: '/zh/', text: '首页' },
+      { link: '/zh/guide/', text: '指南' },
       {
-        text: `v${version}`,
         items: [
           { text: `v${version} (当前)`, link: '/zh/' },
           {
@@ -32,12 +31,13 @@ export const zhConfig = defineConfig({
             link: `https://github.com/${REPOSITORY_SLUG}/releases`,
           },
         ],
+        text: `v${version}`,
       },
     ],
 
     outline: {
-      level: [2, 4],
       label: '本页内容',
+      level: [2, 4],
     },
   },
   title: appTitleZh,
