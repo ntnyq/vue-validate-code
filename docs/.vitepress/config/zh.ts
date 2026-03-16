@@ -6,15 +6,6 @@ import { REPOSITORY_SLUG, appDescriptionZh, appTitleZh } from './meta'
 export const zhConfig = defineConfig({
   description: appDescriptionZh,
   themeConfig: {
-    lastUpdated: {
-      text: '最近更新时间',
-    },
-
-    outline: {
-      level: [2, 4],
-      label: '本页内容',
-    },
-
     docFooter: {
       prev: '上一页',
       next: '下一页',
@@ -23,6 +14,10 @@ export const zhConfig = defineConfig({
     editLink: {
       text: '对本页提出修改建议',
       pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
+    },
+
+    lastUpdated: {
+      text: '最近更新时间',
     },
 
     nav: [
@@ -39,6 +34,11 @@ export const zhConfig = defineConfig({
         ],
       },
     ],
+
+    outline: {
+      level: [2, 4],
+      label: '本页内容',
+    },
   },
   title: appTitleZh,
 })
@@ -54,13 +54,13 @@ export const zhSearch: DefaultTheme.LocalSearchOptions['locales'] = {
         backButtonTitle: '返回',
         displayDetails: '显示详情',
         footer: {
-          selectText: '选择',
-          selectKeyAriaLabel: '选择',
+          closeKeyAriaLabel: '关闭',
+          closeText: '关闭',
+          navigateDownKeyAriaLabel: '向下切换',
           navigateText: '切换',
           navigateUpKeyAriaLabel: '向上切换',
-          navigateDownKeyAriaLabel: '向下切换',
-          closeText: '关闭',
-          closeKeyAriaLabel: '关闭',
+          selectKeyAriaLabel: '选择',
+          selectText: '选择',
         },
         noResultsText: '未找到结果',
         resetButtonTitle: '重置',

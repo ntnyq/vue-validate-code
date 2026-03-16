@@ -5,10 +5,6 @@ import { REPOSITORY_SLUG, appDescription, appTitle } from './meta'
 export const enConfig = defineConfig({
   description: appDescription,
   themeConfig: {
-    outline: {
-      level: [2, 4],
-    },
-
     editLink: {
       text: 'Suggest changes to this page',
       pattern: `https://github.com/${REPOSITORY_SLUG}/edit/main/docs/:path`,
@@ -28,6 +24,10 @@ export const enConfig = defineConfig({
         ],
       },
     ],
+
+    outline: {
+      level: [2, 4],
+    },
   },
 
   title: appTitle,

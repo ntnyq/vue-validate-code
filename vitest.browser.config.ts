@@ -10,13 +10,13 @@ export default defineConfig({
     browser: {
       enabled: true,
       headless: process.env.CI === 'true',
-      provider: playwright(),
-      screenshotDirectory: 'vitest-test-screenshots',
       instances: [
         {
           browser: 'chromium',
         },
       ],
+      provider: playwright(),
+      screenshotDirectory: 'vitest-test-screenshots',
     },
     environment: 'jsdom',
     environmentOptions: {

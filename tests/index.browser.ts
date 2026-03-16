@@ -8,14 +8,14 @@ it('should render ValidateCode component', async () => {
       'data-testid': 'validate-code',
     },
     props: {
-      length: 6,
-      width: 120,
-      height: 40,
-      fontSize: 24,
       background: '#f0f0f0',
       color: '#333333',
-      lineCount: 5,
       dotCount: 30,
+      fontSize: 24,
+      height: 40,
+      length: 6,
+      lineCount: 5,
+      width: 120,
     },
   })
 
