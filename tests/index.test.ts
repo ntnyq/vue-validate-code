@@ -8,7 +8,7 @@ import {
 
 describe('plugin', () => {
   it('should work', () => {
-    expect(ValidateCodePlugin).toBeTruthy()
+    expect(ValidateCodePlugin).toBe(true)
     expect(ValidateCodePlugin.install).toBeInstanceOf(Function)
   })
 
@@ -22,7 +22,7 @@ describe('plugin', () => {
       },
     })
 
-    expect(wrapper.find('.vue-validate-code').exists()).toBeTruthy()
+    expect(wrapper.find('.vue-validate-code').exists()).toBe(true)
   })
 })
 
@@ -30,6 +30,6 @@ describe('component', () => {
   it('should work', () => {
     const wrapper = mount(ValidateCodeComponent)
 
-    expect(wrapper.find('.vue-validate-code').exists()).toBeTruthy()
+    expect(wrapper.find('.vue-validate-code').exists()).toBe(true)
   })
 })
