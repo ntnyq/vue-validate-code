@@ -122,6 +122,8 @@
         "typescript/prefer-ts-expect-error": "off",
         "typescript/require-array-sort-compare": "off",
         "vitest/no-importing-vitest-globals": "off",
+        "vitest/require-test-timeout": "off",
+        "vitest/prefer-strict-boolean-matchers": "off",
       },
     },
   ],

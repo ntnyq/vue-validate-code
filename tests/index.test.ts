@@ -8,7 +8,7 @@ import {
 
 describe('plugin', () => {
   it('should work', () => {
-    expect(ValidateCodePlugin).toBeTruthy()
+    expect(ValidateCodePlugin).toHaveProperty('install')
     expect(ValidateCodePlugin.install).toBeInstanceOf(Function)
   })
 
