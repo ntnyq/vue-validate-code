@@ -1,6 +1,10 @@
-import { cleanObject, randomHexColor, randomInteger } from '@ntnyq/utils'
-import { computed, ref, shallowRef, toValue, unref, watch } from 'vue'
-import { DEFAULT_CONFIG, useGlobalConfig } from '../helpers'
+import { randomHexColor, randomInteger } from '@ntnyq/utils'
+import { computed, shallowRef, toValue, unref, watch } from 'vue'
+import {
+  DEFAULT_CONFIG,
+  resolveConfig,
+  useGlobalConfig,
+} from '../helpers/config'
 import { createRenderer } from '../renderers'
 import type { MaybeRef, MaybeRefOrGetter } from 'vue'
 import type { Props } from '../helpers'
@@ -17,27 +21,23 @@ export function useValidateCode(
   elementRef: MaybeRef<RendererElement | null>,
   options: MaybeRefOrGetter<Props> = {},
 ) {
-  const validateCode = ref('')
-  const renderElement = shallowRef<RendererElement>(undefined!)
+  const validateCode = shallowRef('')
+  const renderElement = shallowRef<RendererElement | null>(null)
   const canvasSize = shallowRef<RenderSize>({ width: 0, height: 0 })
   const currentRendererType = shallowRef<RendererType>('canvas')
   const renderer = shallowRef<Renderer | null>(null)
 
-  const defaultConfig = {
-    ...DEFAULT_CONFIG,
-    ...useGlobalConfig(),
-  }
+  const globalConfig = useGlobalConfig()
 
-  const config = computed<Required<Props>>(() => ({
-    ...defaultConfig,
-    ...cleanObject(toValue(options)),
-  }))
+  const config = computed<Required<Props>>(() =>
+    resolveConfig(globalConfig, toValue(options)),
+  )
 
   const resolvedChars = computed(() =>
     config.value.chars.length ? config.value.chars : DEFAULT_CONFIG.chars,
   )
 
-  function getColor(colors: string[] = []) {
+  function getColor(colors: readonly string[] = []) {
     if (colors.length) {
       return colors.length === 1
         ? colors[0]
@@ -104,14 +104,32 @@ export function useValidateCode(
     renderer.value?.destroy()
 
     validateCode.value = ''
-    renderElement.value = undefined!
+    renderElement.value = null
     renderer.value = null
     canvasSize.value = { width: 0, height: 0 }
   }
 
+  function normalizeSize(size: RenderSize): RenderSize {
+    return {
+      height: Number.isFinite(size.height) ? Math.max(0, size.height) : 0,
+      width: Number.isFinite(size.width) ? Math.max(0, size.width) : 0,
+    }
+  }
+
+  function renderAtSize(nextRenderer: Renderer, size: RenderSize) {
+    const normalizedSize = normalizeSize(size)
+
+    canvasSize.value = normalizedSize
+    nextRenderer.resize(normalizedSize)
+    validateCode.value = nextRenderer.update()
+  }
+
   function resize(size: RenderSize) {
-    canvasSize.value = size
-    renderer.value?.resize(size)
+    const mounted = ensureMountedRenderer()
+    if (!mounted) {
+      return
+    }
+    renderAtSize(mounted.renderer, size)
   }
 
   function render() {
@@ -125,16 +143,24 @@ export function useValidateCode(
       mounted.element.parentNode as HTMLElement
     ).getBoundingClientRect()
 
-    resize({ width, height })
-    update()
+    renderAtSize(mounted.renderer, { width, height })
   }
 
-  watch(config, newConfig => {
-    if (!newConfig.updateOnChange) {
-      return
-    }
-    render()
-  })
+  watch(
+    config,
+    (newConfig, oldConfig) => {
+      if (
+        !newConfig.updateOnChange
+        && newConfig.renderer === oldConfig.renderer
+      ) {
+        return
+      }
+      render()
+    },
+    {
+      flush: 'post',
+    },
+  )
 
   return {
     config,

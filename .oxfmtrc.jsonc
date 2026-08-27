@@ -13,6 +13,7 @@
     "**/node_modules/**",
     "**/dist/**",
     "**/fixtures/**",
+    "docs/auto-imports.d.ts",
     "pnpm-lock.yaml",
     "**/*.min.*",
   ],

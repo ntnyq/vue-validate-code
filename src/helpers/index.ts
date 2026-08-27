@@ -1,3 +1,8 @@
-export * from './types'
 export * from './utils'
-export * from './config'
+export {
+  DEFAULT_CONFIG,
+  GLOBAL_CONFIG_KEY,
+  injectGlobalConfig,
+  useGlobalConfig,
+} from './config'
+export type * from './types'

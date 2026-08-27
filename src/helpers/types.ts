@@ -33,18 +33,18 @@ export type Emits = {
  * @see {@link https://vue-validate-code.ntnyq.com/guide/#props}
  */
 export type Props = {
-  bgColors?: string[]
+  bgColors?: readonly string[]
   caseSensitive?: boolean
   chars?: string
-  colors?: string[]
-  dotColors?: string[]
+  colors?: readonly string[]
+  dotColors?: readonly string[]
   dotCount?: number
-  fontColors?: string[]
+  fontColors?: readonly string[]
   fontCount?: number
   fontFamily?: string
   hasDots?: boolean
   hasLines?: boolean
-  lineColors?: string[]
+  lineColors?: readonly string[]
   lineCount?: number
   maxDotRadius?: number
   maxFontAngle?: number

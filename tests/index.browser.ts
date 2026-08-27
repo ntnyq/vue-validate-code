@@ -2,17 +2,14 @@ import { expect, it } from 'vitest'
 import { render } from 'vitest-browser-vue'
 import { ValidateCode } from '../src'
 
-it('should render ValidateCode component', async () => {
+it('should render the configured validation code with svg', async () => {
   const screen = render(ValidateCode, {
     props: {
-      length: 6,
-      width: 120,
-      height: 40,
-      fontSize: 24,
-      background: '#f0f0f0',
-      color: '#333333',
-      lineCount: 5,
-      dotCount: 30,
+      chars: 'A',
+      fontCount: 6,
+      hasDots: false,
+      hasLines: false,
+      renderer: 'svg',
     },
     attrs: {
       'data-testid': 'validate-code',
@@ -20,5 +17,9 @@ it('should render ValidateCode component', async () => {
   })
 
   expect(screen.getByTestId('validate-code')).toBeDefined()
-  expect(screen.getByTestId('validate-code').element().tagName).toBe('CANVAS')
+  const element = screen.getByTestId('validate-code').element()
+
+  expect(element.tagName).toBe('svg')
+  expect(element.querySelectorAll('text[data-type="char"]')).toHaveLength(6)
+  expect(element.textContent).toBe('AAAAAA')
 })

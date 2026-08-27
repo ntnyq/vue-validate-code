@@ -13,7 +13,7 @@ export type RenderContext = {
   config: Required<Props>
   resolvedChars: string
   size: RenderSize
-  getColor: (colors?: string[]) => string
+  getColor: (colors?: readonly string[]) => string
 }
 
 export interface Renderer {

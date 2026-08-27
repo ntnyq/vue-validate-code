@@ -5,6 +5,9 @@
 [![NPM DOWNLOADS](https://img.shields.io/npm/dy/vue-validate-code.svg)](https://www.npmjs.com/package/vue-validate-code)
 [![LICENSE](https://img.shields.io/github/license/ntnyq/vue-validate-code.svg)](https://github.com/ntnyq/vue-validate-code/blob/main/LICENSE)
 
+> [!WARNING]
+> `vue-validate-code` generates and validates codes entirely in the browser. The SVG renderer exposes its characters as DOM text, and client-side checks can always be bypassed. Use it only as a visual interaction aid—not as CAPTCHA, authentication, or abuse prevention. Security-sensitive flows require a server-generated challenge with server-side validation.
+
 ## Install
 
 ```shell

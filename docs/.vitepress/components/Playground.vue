@@ -60,7 +60,7 @@ function handleValidateSuccess() {
   })
 }
 function handleValidateFail() {
-  ElNotification.success({
+  ElNotification.error({
     title: t('titleValidateResult'),
     message: t('messageValidateFail'),
   })

@@ -4,6 +4,10 @@ sidebar: false
 
 # Guide
 
+::: warning Security notice
+`vue-validate-code` generates and validates codes entirely in the browser. The SVG renderer exposes its characters as DOM text, and client-side checks can always be bypassed. Use it only as a visual interaction aid—not as CAPTCHA, authentication, or abuse prevention. Security-sensitive flows require a server-generated challenge with server-side validation.
+:::
+
 ## Installation
 
 ::: code-group
@@ -174,6 +178,7 @@ Canvas background colors.
 
 - **type**: `number`
 - **default**: `6`
+- **range**: `1` to `64`
 
 Font count.
 
@@ -223,6 +228,7 @@ Max font rotate angle.
 
 - **type**: `number`
 - **default**: `6`
+- **range**: `0` to `256`
 
 Dot count.
 
@@ -251,6 +257,7 @@ Max dot radius.
 
 - **type**: `number`
 - **default**: `6`
+- **range**: `0` to `256`
 
 Line count.
 
@@ -338,4 +345,4 @@ interface CanvasSize {
 
 - **type**: `(size: CanvasSize) => void`
 
-Update canvas size.
+Resize and re-render the validation code. Resizing generates a new code.

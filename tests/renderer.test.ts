@@ -35,24 +35,78 @@ describe('ValidateCode Renderer', () => {
     expect(wrapper.findAll('text[data-type="char"]').length).toBeGreaterThan(0)
   })
 
-  it('canvas renderer should have validation code', () => {
+  it('canvas renderer should validate its generated code', () => {
     const wrapper = mount(ValidateCode, {
       props: {
+        chars: 'A',
+        fontCount: 4,
         renderer: 'canvas',
       },
     })
-    const validateCode = wrapper.vm.validate('ABCD123')
-    expect(typeof validateCode).toBe('boolean')
+
+    expect(wrapper.vm.validate('AAAA')).toBeTruthy()
   })
 
-  it('svg renderer should have validation code', () => {
+  it('svg renderer should validate its generated code', () => {
     const wrapper = mount(ValidateCode, {
       props: {
+        chars: 'A',
+        fontCount: 4,
         renderer: 'svg',
       },
     })
-    const validateCode = wrapper.vm.validate('ABCD123')
-    expect(typeof validateCode).toBe('boolean')
+
+    expect(wrapper.text()).toBe('AAAA')
+    expect(wrapper.vm.validate('AAAA')).toBeTruthy()
+  })
+
+  it('should not update on click when disabled', async () => {
+    const wrapper = mount(ValidateCode, {
+      props: {
+        chars: 'A',
+        renderer: 'svg',
+        updateOnClick: false,
+      },
+    })
+    const firstCharacter = wrapper.find('text[data-type="char"]').element
+
+    await wrapper.find('svg').trigger('click')
+
+    expect(wrapper.find('text[data-type="char"]').element).toBe(firstCharacter)
+  })
+
+  it('should emit validate and fail for empty input', () => {
+    const wrapper = mount(ValidateCode)
+
+    expect(wrapper.vm.validate('')).toBeFalsy()
+    expect(wrapper.emitted('validate')).toEqual([[false]])
+    expect(wrapper.emitted('fail')).toHaveLength(1)
+  })
+
+  it('should resize and redraw svg content', () => {
+    const wrapper = mount(ValidateCode, {
+      props: {
+        chars: 'A',
+        fontCount: 2,
+        renderer: 'svg',
+      },
+    })
+    const firstCharacter = wrapper.find('text[data-type="char"]').element
+
+    wrapper.vm.resize({ width: 240, height: 80 })
+
+    expect(wrapper.find('svg').attributes()).toMatchObject({
+      height: '80',
+      width: '240',
+    })
+    expect(wrapper.find('rect[data-type="bg"]').attributes()).toMatchObject({
+      height: '80',
+      width: '240',
+    })
+    expect(wrapper.find('text[data-type="char"]').element).not.toBe(
+      firstCharacter,
+    )
+    expect(wrapper.vm.validate('AA')).toBeTruthy()
   })
 
   it('should keep updating svg content without leaking old nodes', async () => {

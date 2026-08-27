@@ -24,6 +24,20 @@ describe('plugin', () => {
 
     expect(wrapper.find('.vue-validate-code').exists()).toBeTruthy()
   })
+
+  it('should apply global renderer config', () => {
+    const App = defineComponent({
+      template: `<ValidateCode />`,
+    })
+    const wrapper = mount(App, {
+      global: {
+        plugins: [[ValidateCodePlugin, { renderer: 'svg' }]],
+      },
+    })
+
+    expect(wrapper.find('svg').exists()).toBeTruthy()
+    expect(wrapper.findAll('text[data-type="char"]')).toHaveLength(6)
+  })
 })
 
 describe('component', () => {
