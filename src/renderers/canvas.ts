@@ -1,4 +1,4 @@
-import { randomNumber } from '@ntnyq/utils'
+import { randomInteger } from '@ntnyq/utils'
 import { loop } from '../helpers'
 import type {
   RenderContext,
@@ -40,9 +40,9 @@ export function createCanvasRenderer(
     loop(config.lineCount, () => {
       ctx.strokeStyle = getColor(config.lineColors)
       ctx.beginPath()
-      ctx.lineWidth = randomNumber(config.minLineWidth, config.maxLineWidth)
-      ctx.moveTo(randomNumber(0, size.width), randomNumber(0, size.height))
-      ctx.lineTo(randomNumber(0, size.width), randomNumber(0, size.height))
+      ctx.lineWidth = randomInteger(config.minLineWidth, config.maxLineWidth)
+      ctx.moveTo(randomInteger(0, size.width), randomInteger(0, size.height))
+      ctx.lineTo(randomInteger(0, size.width), randomInteger(0, size.height))
       ctx.stroke()
     })
   }
@@ -59,9 +59,9 @@ export function createCanvasRenderer(
       ctx.fillStyle = getColor(config.dotColors)
       ctx.beginPath()
       ctx.arc(
-        randomNumber(0, size.width),
-        randomNumber(0, size.height),
-        randomNumber(config.minDotRadius, config.maxDotRadius),
+        randomInteger(0, size.width),
+        randomInteger(0, size.height),
+        randomInteger(config.minDotRadius, config.maxDotRadius),
         0,
         Math.PI * 2,
       )
@@ -75,16 +75,16 @@ export function createCanvasRenderer(
     const chars: string[] = []
 
     loop(config.fontCount, idx => {
-      const char = resolvedChars[randomNumber(resolvedChars.length)]
-      const fontSize = randomNumber(config.minFontSize, config.maxFontSize)
+      const char = resolvedChars[randomInteger(resolvedChars.length)]
+      const fontSize = randomInteger(config.minFontSize, config.maxFontSize)
       const columnWidth = (size.width - config.padding * 2) / config.fontCount
       const x =
         columnWidth * idx + config.padding + (columnWidth - fontSize) / 2
       const y =
-        randomNumber(size.height - config.padding * 2 - fontSize)
+        randomInteger(size.height - config.padding * 2 - fontSize)
         + config.padding
         + fontSize / 2
-      const deg = randomNumber(config.minFontAngle, config.maxFontAngle)
+      const deg = randomInteger(config.minFontAngle, config.maxFontAngle)
 
       ctx.fillStyle = getColor(config.fontColors)
       ctx.font = `${fontSize}px ${config.fontFamily}`

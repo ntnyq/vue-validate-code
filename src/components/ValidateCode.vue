@@ -13,7 +13,7 @@ import { useValidateCode } from '../composables'
 import type { Emits, Props } from '../helpers'
 
 const props = defineProps<Props>()
-const emits = defineEmits<Emits>()
+const emit = defineEmits<Emits>()
 
 // https://github.com/vuejs/core/issues/11795#issuecomment-2326858438
 const canvasEl = useTemplateRef('canvasRef')
@@ -49,18 +49,18 @@ function handleClick() {
 
 function validate(input: string) {
   if (isEmptyString(input)) {
-    emits('fail')
+    emit('fail')
     return false
   }
 
   const isValid = validateCode(input)
 
-  emits('validate', isValid)
+  emit('validate', isValid)
 
   if (isValid) {
-    emits('success')
+    emit('success')
   } else {
-    emits('fail')
+    emit('fail')
   }
 
   return isValid
@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
 
 onMounted(() => {
   render()
-  emits('ready')
+  emit('ready')
 })
 
 watch(

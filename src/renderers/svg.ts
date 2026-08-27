@@ -1,4 +1,4 @@
-import { randomNumber } from '@ntnyq/utils'
+import { randomInteger } from '@ntnyq/utils'
 import { loop } from '../helpers'
 import type {
   RenderContext,
@@ -51,13 +51,13 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
     loop(config.lineCount, () => {
       const line = document.createElementNS(SVG_NS, 'line')
       line.dataset.type = 'line'
-      line.setAttribute('x1', String(randomNumber(0, size.width)))
-      line.setAttribute('y1', String(randomNumber(0, size.height)))
-      line.setAttribute('x2', String(randomNumber(0, size.width)))
-      line.setAttribute('y2', String(randomNumber(0, size.height)))
+      line.setAttribute('x1', String(randomInteger(0, size.width)))
+      line.setAttribute('y1', String(randomInteger(0, size.height)))
+      line.setAttribute('x2', String(randomInteger(0, size.width)))
+      line.setAttribute('y2', String(randomInteger(0, size.height)))
       line.setAttribute(
         'stroke-width',
-        String(randomNumber(config.minLineWidth, config.maxLineWidth)),
+        String(randomInteger(config.minLineWidth, config.maxLineWidth)),
       )
       line.setAttribute('stroke', getColor(config.lineColors))
 
@@ -76,11 +76,11 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
     loop(config.dotCount, () => {
       const circle = document.createElementNS(SVG_NS, 'circle')
       circle.dataset.type = 'dot'
-      circle.setAttribute('cx', String(randomNumber(0, size.width)))
-      circle.setAttribute('cy', String(randomNumber(0, size.height)))
+      circle.setAttribute('cx', String(randomInteger(0, size.width)))
+      circle.setAttribute('cy', String(randomInteger(0, size.height)))
       circle.setAttribute(
         'r',
-        String(randomNumber(config.minDotRadius, config.maxDotRadius)),
+        String(randomInteger(config.minDotRadius, config.maxDotRadius)),
       )
       circle.setAttribute('fill', getColor(config.dotColors))
 
@@ -94,16 +94,16 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
     const chars: string[] = []
 
     loop(config.fontCount, idx => {
-      const char = resolvedChars[randomNumber(resolvedChars.length)]
-      const fontSize = randomNumber(config.minFontSize, config.maxFontSize)
+      const char = resolvedChars[randomInteger(resolvedChars.length)]
+      const fontSize = randomInteger(config.minFontSize, config.maxFontSize)
       const columnWidth = (size.width - config.padding * 2) / config.fontCount
       const x =
         columnWidth * idx + config.padding + (columnWidth - fontSize) / 2
       const y =
-        randomNumber(size.height - config.padding * 2 - fontSize)
+        randomInteger(size.height - config.padding * 2 - fontSize)
         + config.padding
         + fontSize / 2
-      const deg = randomNumber(config.minFontAngle, config.maxFontAngle)
+      const deg = randomInteger(config.minFontAngle, config.maxFontAngle)
       const text = document.createElementNS(SVG_NS, 'text')
 
       text.dataset.type = 'char'

@@ -1,4 +1,4 @@
-import { cleanObject, randomHexColor, randomNumber } from '@ntnyq/utils'
+import { cleanObject, randomHexColor, randomInteger } from '@ntnyq/utils'
 import { computed, ref, shallowRef, toValue, unref, watch } from 'vue'
 import { DEFAULT_CONFIG, useGlobalConfig } from '../helpers'
 import { createRenderer } from '../renderers'
@@ -41,7 +41,7 @@ export function useValidateCode(
     if (colors.length) {
       return colors.length === 1
         ? colors[0]
-        : colors[randomNumber(0, colors.length)]
+        : colors[randomInteger(0, colors.length)]
     }
 
     const globalColors = config.value.colors
@@ -49,7 +49,7 @@ export function useValidateCode(
     if (globalColors.length) {
       return globalColors.length === 1
         ? globalColors[0]
-        : globalColors[randomNumber(0, globalColors.length)]
+        : globalColors[randomInteger(0, globalColors.length)]
     }
 
     return randomHexColor()
