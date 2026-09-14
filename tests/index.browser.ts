@@ -3,7 +3,7 @@ import { render } from 'vitest-browser-vue'
 import { ValidateCode } from '../src'
 
 it('should render the configured validation code with svg', async () => {
-  const screen = render(ValidateCode, {
+  const screen = await render(ValidateCode, {
     props: {
       chars: 'A',
       fontCount: 6,
