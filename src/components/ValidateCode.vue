@@ -5,7 +5,14 @@ import { useValidateCode } from '../composables'
 import type { Emits, Props } from '../helpers'
 import type { RendererElement } from '../types'
 
-const props = defineProps<Props>()
+// Preserve omitted Boolean props so global config and defaults can apply.
+const props = withDefaults(defineProps<Props>(), {
+  caseSensitive: undefined,
+  hasDots: undefined,
+  hasLines: undefined,
+  updateOnChange: undefined,
+  updateOnClick: undefined,
+})
 const emit = defineEmits<Emits>()
 
 const elementRef = useTemplateRef<RendererElement>('elementRef')

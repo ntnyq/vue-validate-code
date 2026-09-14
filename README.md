@@ -26,7 +26,7 @@ pnpm add vue-validate-code
 
 ```vue
 <script lang="ts" setup>
-import { useTemplateRef } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 import { ValidateCode } from 'vue-validate-code'
 
 const validateCode = ref('')
@@ -38,7 +38,7 @@ function handleTriggerValidate() {
   }
   validateCodeRef.value?.validate(validateCode.value)
 }
-function handleValidateCallback(isValid) {
+function handleValidateCallback(isValid: boolean) {
   if (isValid) {
     console.log('validate success')
   } else {

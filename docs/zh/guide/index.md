@@ -32,7 +32,7 @@ pnpm add vue-validate-code
 
 ```vue [validate-code.vue]
 <script lang="ts" setup>
-import { useTemplateRef } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 import { ValidateCode } from 'vue-validate-code'
 
 const validateCode = ref('')
@@ -44,7 +44,7 @@ function handleTriggerValidate() {
   }
   validateCodeRef.value?.validate(validateCode.value)
 }
-function handleValidateCallback(isValid) {
+function handleValidateCallback(isValid: boolean) {
   if (isValid) {
     console.log('校验成功')
   } else {
@@ -104,12 +104,16 @@ app.mount('#app')
 
 ## 属性
 
+配置优先级为：显式传入的组件属性 > 插件全局配置 > 内置默认值。省略布尔属性时继承配置值，显式传入 `false` 时关闭对应选项。
+
 ### chars
 
 - **类型**: `string`
 - **默认值**: `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
 
 验证码字符集.
+
+按 Unicode 码点抽取字符，因此 `😀` 等表情不会被拆开。由多个码点组成的序列（例如通过连接符组合的表情或带组合音标的字母）仍会被分别抽取。
 
 ### padding
 

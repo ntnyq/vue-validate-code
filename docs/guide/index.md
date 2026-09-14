@@ -32,7 +32,7 @@ pnpm add vue-validate-code
 
 ```vue [validate-code.vue]
 <script lang="ts" setup>
-import { useTemplateRef } from 'vue'
+import { ref, useTemplateRef } from 'vue'
 import { ValidateCode } from 'vue-validate-code'
 
 const validateCode = ref('')
@@ -44,7 +44,7 @@ function handleTriggerValidate() {
   }
   validateCodeRef.value?.validate(validateCode.value)
 }
-function handleValidateCallback(isValid) {
+function handleValidateCallback(isValid: boolean) {
   if (isValid) {
     console.log('validate success')
   } else {
@@ -104,12 +104,16 @@ Then you can component `ValidateCode` in your app everywhere like above.
 
 ## Props
 
+Explicit component props take precedence over plugin configuration, followed by built-in defaults. Omitting a Boolean prop inherits its configured value; passing `false` explicitly disables it.
+
 ### chars
 
 - **type**: `string`
 - **default**: `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789`
 
 Chars to generate validate code.
+
+Characters are sampled by Unicode code point, so emoji such as `😀` are kept intact. Sequences containing multiple code points, such as joined emoji or letters with combining marks, are sampled separately.
 
 ### padding
 

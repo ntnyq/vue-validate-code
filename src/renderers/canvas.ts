@@ -24,6 +24,7 @@ export function createCanvasRenderer(
     const ctx = assertContext()
     const { size, config, getColor } = getContext()
 
+    ctx.clearRect(0, 0, size.width, size.height)
     ctx.textBaseline = 'middle'
     ctx.fillStyle = getColor(config.bgColors)
     ctx.fillRect(0, 0, size.width, size.height)
@@ -72,16 +73,17 @@ export function createCanvasRenderer(
   function drawChars() {
     const ctx = assertContext()
     const { size, config, getColor, resolvedChars } = getContext()
+    const availableChars = Array.from(resolvedChars)
     const chars: string[] = []
 
     loop(config.fontCount, idx => {
-      const char = resolvedChars[randomInteger(resolvedChars.length)]
+      const char = availableChars[randomInteger(availableChars.length)]
       const fontSize = randomInteger(config.minFontSize, config.maxFontSize)
       const columnWidth = (size.width - config.padding * 2) / config.fontCount
       const x =
         columnWidth * idx + config.padding + (columnWidth - fontSize) / 2
       const y =
-        randomInteger(size.height - config.padding * 2 - fontSize)
+        randomInteger(Math.max(0, size.height - config.padding * 2 - fontSize))
         + config.padding
         + fontSize / 2
       const deg = randomInteger(config.minFontAngle, config.maxFontAngle)
