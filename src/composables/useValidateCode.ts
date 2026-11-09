@@ -83,7 +83,10 @@ export function useValidateCode(
       nextRenderer.mount(element)
     }
 
-    return { element, renderer: nextRenderer }
+    return {
+      element,
+      renderer: nextRenderer,
+    }
   }
 
   function update() {
