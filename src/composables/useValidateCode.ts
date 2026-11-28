@@ -66,6 +66,7 @@ export function useValidateCode(
       }))
       currentRendererType.value = type
     }
+
     return renderer.value
   }
 
@@ -91,9 +92,11 @@ export function useValidateCode(
 
   function update() {
     const mounted = ensureMountedRenderer()
+
     if (!mounted) {
       return
     }
+
     validateCode.value = mounted.renderer.update()
   }
 
@@ -129,9 +132,11 @@ export function useValidateCode(
 
   function resize(size: RenderSize) {
     const mounted = ensureMountedRenderer()
+
     if (!mounted) {
       return
     }
+
     renderAtSize(mounted.renderer, size)
   }
 
@@ -158,6 +163,7 @@ export function useValidateCode(
       ) {
         return
       }
+
       render()
     },
     {

@@ -28,6 +28,7 @@ it('should render the configured validation code with svg', async () => {
 
 it('keeps SVG glyphs inside the horizontal padding', async () => {
   const container = document.createElement('div')
+
   container.style.cssText = 'width: 240px; height: 80px'
   document.body.append(container)
   const screen = await render(ValidateCode, {
@@ -47,10 +48,12 @@ it('keeps SVG glyphs inside the horizontal padding', async () => {
   })
 
   const characters = screen.container.querySelectorAll('text')
+
   expect(characters).toHaveLength(6)
 
   for (const character of characters) {
     const bounds = character.getBBox()
+
     expect(bounds.x).toBeGreaterThanOrEqual(10)
     expect(bounds.x + bounds.width).toBeLessThanOrEqual(230)
   }
@@ -61,6 +64,7 @@ it.each(['transparent', 'rgba(255, 255, 255, 0.5)'])(
   async background => {
     const random = vi.spyOn(Math, 'random').mockReturnValue(0)
     const container = document.createElement('div')
+
     container.style.cssText = 'width: 100px; height: 50px'
     document.body.append(container)
     const screen = await render(ValidateCode, {
@@ -83,13 +87,16 @@ it.each(['transparent', 'rgba(255, 255, 255, 0.5)'])(
       },
       attrs: { 'data-testid': 'validate-code' },
     })
+
     // Measure the final container after the test renderer unwraps its mount node.
     await screen.rerender({ chars: 'AB' })
     const canvas = screen.container.querySelector('canvas')
     const context = canvas?.getContext('2d')
+
     if (!canvas || !context) {
       throw new Error('Expected a mounted canvas context')
     }
+
     expect(canvas.width).toBe(100)
     expect(canvas.height).toBe(50)
 
@@ -106,6 +113,7 @@ it.each(['transparent', 'rgba(255, 255, 255, 0.5)'])(
       (count, value, index) => count + Number(value !== clean[index]),
       0,
     )
+
     expect(differentChannels).toBe(0)
   },
 )

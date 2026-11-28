@@ -43,6 +43,7 @@ function handleUpdate() {
   validateCodeRef.value?.update()
   validateCode.value = ''
 }
+
 function handleValidate() {
   if (!validateCode.value) {
     return ElNotification.warning({
@@ -53,12 +54,14 @@ function handleValidate() {
 
   validateCodeRef.value?.validate(validateCode.value)
 }
+
 function handleValidateSuccess() {
   ElNotification.success({
     title: t('titleValidateResult'),
     message: t('messageValidateSuccess'),
   })
 }
+
 function handleValidateFail() {
   ElNotification.error({
     title: t('titleValidateResult'),

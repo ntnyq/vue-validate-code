@@ -9,5 +9,6 @@ export function createRenderer(
   if (type === 'svg') {
     return createSvgRenderer(getContext)
   }
+
   return createCanvasRenderer(getContext)
 }

@@ -63,9 +63,11 @@ function resolveBoolean(
   if (typeof localValue === 'boolean') {
     return localValue
   }
+
   if (typeof globalValue === 'boolean') {
     return globalValue
   }
+
   return fallback
 }
 
@@ -109,9 +111,11 @@ function resolveRenderer(
   if (localValue === 'canvas' || localValue === 'svg') {
     return localValue
   }
+
   if (globalValue === 'canvas' || globalValue === 'svg') {
     return globalValue
   }
+
   return DEFAULT_CONFIG.renderer
 }
 
@@ -123,9 +127,11 @@ function resolveString(
   if (typeof localValue === 'string') {
     return localValue
   }
+
   if (typeof globalValue === 'string') {
     return globalValue
   }
+
   return fallback
 }
 

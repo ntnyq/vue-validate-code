@@ -5,6 +5,7 @@ import { ValidateCode } from '../src/components'
 describe('ValidateCode Renderer', () => {
   it('should render with canvas by default', () => {
     const wrapper = mount(ValidateCode)
+
     expect(wrapper.find('canvas').exists()).toBeTruthy()
     expect(wrapper.find('svg').exists()).toBeFalsy()
   })
@@ -15,6 +16,7 @@ describe('ValidateCode Renderer', () => {
         renderer: 'svg',
       },
     })
+
     expect(wrapper.find('svg').exists()).toBeTruthy()
     expect(wrapper.find('canvas').exists()).toBeFalsy()
   })
@@ -120,6 +122,7 @@ describe('ValidateCode Renderer', () => {
     })
 
     const svg = wrapper.find('svg')
+
     expect(svg.exists()).toBeTruthy()
 
     await wrapper.vm.update()

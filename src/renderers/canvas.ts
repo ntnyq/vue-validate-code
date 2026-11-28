@@ -17,6 +17,7 @@ export function createCanvasRenderer(
     if (!canvasContext) {
       throw new Error('Canvas renderer is not mounted')
     }
+
     return canvasContext
   }
 
@@ -112,6 +113,7 @@ export function createCanvasRenderer(
       if (!element) {
         return
       }
+
       element.width = size.width
       element.height = size.height
     },
@@ -119,10 +121,12 @@ export function createCanvasRenderer(
       drawBg()
       drawLines()
       drawDots()
+
       return drawChars()
     },
     destroy() {
       const { size } = getContext()
+
       canvasContext?.clearRect(0, 0, size.width, size.height)
       element = null
       canvasContext = null
