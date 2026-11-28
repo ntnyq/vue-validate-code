@@ -16,6 +16,7 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
     if (!element) {
       throw new Error('SVG renderer is not mounted')
     }
+
     return element
   }
 
@@ -50,6 +51,7 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
 
     loop(config.lineCount, () => {
       const line = document.createElementNS(SVG_NS, 'line')
+
       line.dataset.type = 'line'
       line.setAttribute('x1', String(randomInteger(0, size.width)))
       line.setAttribute('y1', String(randomInteger(0, size.height)))
@@ -75,6 +77,7 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
 
     loop(config.dotCount, () => {
       const circle = document.createElementNS(SVG_NS, 'circle')
+
       circle.dataset.type = 'dot'
       circle.setAttribute('cx', String(randomInteger(0, size.width)))
       circle.setAttribute('cy', String(randomInteger(0, size.height)))
@@ -133,6 +136,7 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
       if (!element) {
         return
       }
+
       element.setAttribute('width', String(size.width))
       element.setAttribute('height', String(size.height))
     },
@@ -141,12 +145,14 @@ export function createSvgRenderer(getContext: () => RenderContext): Renderer {
       drawBg()
       drawLines()
       drawDots()
+
       return drawChars()
     },
     destroy() {
       if (!element) {
         return
       }
+
       clearContent()
       element = null
     },

@@ -32,6 +32,7 @@ function handleClick() {
   if (!config.value.updateOnClick) {
     return
   }
+
   update()
 }
 
@@ -39,6 +40,7 @@ function validate(input: string) {
   if (isEmptyString(input)) {
     emit('validate', false)
     emit('fail')
+
     return false
   }
 

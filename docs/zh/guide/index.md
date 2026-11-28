@@ -42,8 +42,10 @@ function handleTriggerValidate() {
   if (!validateCode.value) {
     return console.log('未输入验证码')
   }
+
   validateCodeRef.value?.validate(validateCode.value)
 }
+
 function handleValidateCallback(isValid: boolean) {
   if (isValid) {
     console.log('校验成功')

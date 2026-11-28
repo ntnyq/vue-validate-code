@@ -42,8 +42,10 @@ function handleTriggerValidate() {
   if (!validateCode.value) {
     return console.log('No validate code value')
   }
+
   validateCodeRef.value?.validate(validateCode.value)
 }
+
 function handleValidateCallback(isValid: boolean) {
   if (isValid) {
     console.log('validate success')
